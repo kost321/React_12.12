@@ -3,3 +3,17 @@ label{
     margin: 20px;
     flex-direction: column;
 }
+
+.form-inner {
+    padding: 50px;
+ }
+ 
+ .form-inner input[type="submit"] {
+    margin-top: 30px;
+    background: #f69a73;
+    border-bottom: 4px solid #d87d56;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+ }
+

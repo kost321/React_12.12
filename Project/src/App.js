@@ -7,7 +7,7 @@ import './App.css'
   render() {
     return (
       <div className="App">
-        <div>Creating a questionnaire</div>
+        <div className="title">Creating a questionnaire</div>
         <FormQuestionnaire/>
       </div>
     );

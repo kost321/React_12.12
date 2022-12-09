@@ -1,5 +1,5 @@
 import React from "react";
-import FieldForm from "./FieldForm/FieldForm";
+import FieldForm from "./Form/FieldForm";
 
 import './formQuestionnaire.css'
 
@@ -20,7 +20,7 @@ class FormQuestionnaire extends React.Component {
 
   render() {
     return (
-      <form className="form">
+      <form className="form-inner">
         <label>
           Name:
           <FieldForm placeholder="Name" value={this.state.nameValue} onChange={(event) => this.setState({nameValue: event.target.value})}/>
@@ -54,8 +54,8 @@ class FormQuestionnaire extends React.Component {
           <FieldForm rows={7} placeholder="Description of the latest project" value={this.state.descriptionOfTheLatestProjectValue} onChange={(event) => this.setState({descriptionOfTheLatestProjectValue: event.target.value})}/>
         </label>
         <div>
-          <input type="submit" value="Cancel"/>
           <input type="submit" value="Save"/>
+          <input type="submit" value="Cancel"/>
         </div>
       </form>
     );
