@@ -1,5 +1,5 @@
 import React from "react";
-import FormQuestionnaire from "./components/form/FormQuestionnaire";
+import FormQuestionnaire from './components/FormQuestionnaire/FormQuestionnaire.jsx'
 
 import './App.css'
 
@@ -7,7 +7,7 @@ import './App.css'
   render() {
     return (
       <div className="App">
-        <div className="title">Creating a questionnaire</div>
+        <div className="title">Создание анкеты</div>
         <FormQuestionnaire/>
       </div>
     );
