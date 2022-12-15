@@ -1,6 +1,6 @@
 import React from "react";
 
-import './fieldForm.css'
+import './input.css'
 
 class Input extends React.Component {
   

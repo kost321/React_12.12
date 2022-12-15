@@ -1,5 +1,5 @@
 import React from "react";
-import Input from "../FieldForm/FieldForm";
+import Input from "../Input/Input";
 import TextareaField from "../TextareaField/TextareaField"
 
 import './formQuestionnaire.css'
