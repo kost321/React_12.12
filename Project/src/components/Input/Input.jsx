@@ -11,8 +11,7 @@ class Input extends React.Component {
         {this.props.label}
         <input type={this.props.type} placeholder={this.props.placeholder} value={this.props.value} onChange={this.props.onChange} />
         {this.props.formErrors}
-      </label>
-       
+      </label>  
     )
   }
 }

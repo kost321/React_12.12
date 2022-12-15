@@ -38,11 +38,19 @@ class FormQuestionnaire extends React.Component {
       telephoneValue: this.state.telephoneValue,
       webSiteValue: this.state.webSiteValue,
       aboutMyselfValue: this.state.aboutMyselfValue,
+      aboutMyselfValueCount: this.state.aboutMyselfValue,
       technologyStackValue: this.state.technologyStackValue,
-      descriptionOfTheLatestProjectValue: this.state.descriptionOfTheLatestProjectValue
+      technologyStackValueCount: this.state.technologyStackValue,
+      descriptionOfTheLatestProjectValue: this.state.descriptionOfTheLatestProjectValue,
+      descriptionOfTheLatestProjectValueCount: this.state.descriptionOfTheLatestProjectValue
     }
 
     let newFormError = {};
+
+    if(!newObj.webSiteValue.endsWith('https://', 8)) {
+      newFormError.webSiteValue = 'Строка должный начинаться с https://'
+    }
+
     for(let i in newObj) {
       newObj[i] = newObj[i].trim();
       if(newObj[i] === "") {
@@ -56,7 +64,14 @@ class FormQuestionnaire extends React.Component {
       newFormError.surnameValue = 'Напишите с заглавной буквы'
     }
 
-    console.log(newFormError)
+    if(newObj.aboutMyselfValue.length > 600) {
+      newFormError.aboutMyselfValueCount = 'Превышен лимит символов в поле';
+    } else if(newObj.technologyStackValue.length > 600) {
+      newFormError.technologyStackValueCount = 'Превышен лимит символов в поле';
+    } else if(newObj.descriptionOfTheLatestProjectValue.length > 600) {
+      newFormError.descriptionOfTheLatestProjectValueCount = 'Превышен лимит символов в поле';
+    }
+    
     this.setState({formErrors:newFormError})
     event.preventDefault()
   }
