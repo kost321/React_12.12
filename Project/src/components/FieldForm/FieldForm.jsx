@@ -2,7 +2,7 @@ import React from "react";
 
 import './fieldForm.css'
 
-class FieldForm extends React.Component {
+class Input extends React.Component {
   
   render() {
     return (
@@ -14,10 +14,4 @@ class FieldForm extends React.Component {
   }
 }
 
-export default FieldForm;
-
-
-
-
-
-  
+export default Input;

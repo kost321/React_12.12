@@ -1,5 +1,5 @@
 import React from "react";
-import FieldForm from "../FieldForm/FieldForm";
+import Input from "../FieldForm/FieldForm";
 import TextareaField from "../TextareaField/TextareaField"
 
 import './formQuestionnaire.css'
@@ -22,11 +22,11 @@ class FormQuestionnaire extends React.Component {
   render() {
     return (
       <form className="form-inner">
-          <FieldForm label="Имя" placeholder="Имя" value={this.state.nameValue} onChange={(event) => this.setState({nameValue: event.target.value})}/>
-          <FieldForm label="Фамилия" placeholder="Фамилия" value={this.state.surnameValue} onChange={(event) => this.setState({surnameValue: event.target.value})}/>
-          <FieldForm label="Дата рождения" placeholder="Дата рождения" value={this.state.dateOfBirthValue} onChange={(event) => this.setState({dateOfBirthValue: event.target.value})}/>
-          <FieldForm label="Телефон" placeholder="Телефон" value={this.state.telephoneValue} onChange={(event) => this.setState({telephoneValue: event.target.value})}/>
-          <FieldForm label="Сайт" placeholder="Сайт" value={this.state.webSiteValue} onChange={(event) => this.setState({webSiteValue: event.target.value})}/>
+          <Input label="Имя" placeholder="Имя" value={this.state.nameValue} onChange={(event) => this.setState({nameValue: event.target.value})}/>
+          <Input label="Фамилия" placeholder="Фамилия" value={this.state.surnameValue} onChange={(event) => this.setState({surnameValue: event.target.value})}/>
+          <Input label="Дата рождения" placeholder="Дата рождения" value={this.state.dateOfBirthValue} onChange={(event) => this.setState({dateOfBirthValue: event.target.value})}/>
+          <Input label="Телефон" placeholder="Телефон" value={this.state.telephoneValue} onChange={(event) => this.setState({telephoneValue: event.target.value})}/>
+          <Input label="Сайт" placeholder="Сайт" value={this.state.webSiteValue} onChange={(event) => this.setState({webSiteValue: event.target.value})}/>
           <TextareaField label="О себе" rows={7} placeholder="О себе" value={this.state.aboutMyselfValue} onChange={(event) => this.setState({aboutMyselfValue: event.target.value})} />
           <TextareaField label="Стек технологий" rows={7} placeholder="Стек технологий" value={this.state.technologyStackValue} onChange={(event) => this.setState({technologyStackValue: event.target.value})}/>
           <TextareaField label="Описание последнего проекта" rows={7} placeholder="Описание последнего проекта" value={this.state.descriptionOfTheLatestProjectValue} onChange={(event) => this.setState({descriptionOfTheLatestProjectValue: event.target.value})}/>
@@ -40,9 +40,3 @@ class FormQuestionnaire extends React.Component {
 }
 
 export default FormQuestionnaire;
-
-
-
-
-
-  
