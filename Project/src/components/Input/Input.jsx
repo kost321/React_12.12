@@ -1,5 +1,4 @@
 import React from "react";
-import FormErrors from "../FormErrors/FormErrors";
 
 import './input.css'
 

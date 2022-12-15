@@ -7,7 +7,6 @@ import './App.css'
   render() {
     return (
       <div className="App">
-        <div className="title">Создание анкеты</div>
         <FormQuestionnaire/>
       </div>
     );

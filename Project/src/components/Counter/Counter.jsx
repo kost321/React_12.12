@@ -2,10 +2,7 @@ import React from "react";
 
 
 class Counter extends React.Component {
-
-
   render() {
-    console.log(this.props.value)
     if(this.props.value.length  > 600) {
       return (
         <div>
