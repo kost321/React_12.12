@@ -2,17 +2,14 @@ import React from "react";
 
 import './input.css'
 
-class Input extends React.Component {
-  
-  render() {
-    return (
-      <label>
-        {this.props.label}
-        <input type={this.props.type} placeholder={this.props.placeholder} value={this.props.value} onChange={this.props.onChange} />
-        {this.props.formErrors}
-      </label>  
-    )
-  }
+function Input(props) {
+  return (
+    <label>
+      {props.label}
+      <input type={props.type} placeholder={props.placeholder} value={props.value} onChange={props.onChange} />
+      {props.formErrors}
+    </label>  
+  )
 }
 
 export default Input;

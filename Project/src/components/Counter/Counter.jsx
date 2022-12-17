@@ -1,22 +1,19 @@
 import React from "react";
 
 
-class Counter extends React.Component {
-  render() {
-    if(this.props.value.length  > 600) {
-      return (
-        <div>
-          {'Превышен лимит символов в поле'}
-        </div>
+function Counter(props) {
+  if(props.value.length  > 600) {
+    return (
+      <>
+      </>
       )       
-    } else {
-      return (
-        <div>
-          {this.props.value.length + '/' + this.props.maxLength}
-        </div>
-      )
-    }
-  }  
+  } else {
+    return (
+      <div>
+        {props.value.length + '/' + props.max}
+      </div>
+    )
+  }
 }
 
 export default Counter;
