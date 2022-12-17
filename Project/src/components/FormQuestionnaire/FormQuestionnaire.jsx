@@ -75,9 +75,11 @@ function FormQuestionnaire() {
 
     if(newObj.aboutMyselfValue.length > 600) {
       newFormError.aboutMyselfValue = 'Превышен лимит символов в поле';
-    } else if(newObj.technologyStackValue.length > 600) {
+    }
+    if(newObj.technologyStackValue.length > 600) {
       newFormError.technologyStackValue = 'Превышен лимит символов в поле';
-    } else if(newObj.descriptionOfTheLatestProjectValue.length > 600) {
+    }
+    if(newObj.descriptionOfTheLatestProjectValue.length > 600) {
       newFormError.descriptionOfTheLatestProjectValue = 'Превышен лимит символов в поле';
     }
 
@@ -202,8 +204,8 @@ function FormQuestionnaire() {
           placeholder: 'Стек технологий',
           value: technologyStackValue,
           onChange: (event) => {
+            setTechnologyStackValue(event.target.value)
             if(event.target.value.length > 600) {
-              setTechnologyStackValue(event.target.value)
               setFormErrors( prev => {
                 return {
                   ...prev,
@@ -227,8 +229,8 @@ function FormQuestionnaire() {
           placeholder: 'Описание последнего проекта',
           value: descriptionOfTheLatestProjectValue,
           onChange: (event) => {
+            setDescriptionOfTheLatestProjectValue(event.target.value);
             if(event.target.value.length > 600) {
-              setDescriptionOfTheLatestProjectValue(event.target.value);
               setFormErrors( prev => {
                 return {
                   ...prev,
