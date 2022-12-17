@@ -17,7 +17,16 @@ class FormQuestionnaire extends React.Component {
       aboutMyselfValue: '',
       technologyStackValue: '',
       descriptionOfTheLatestProjectValue: '',
-      formErrors: {},
+      formErrors: {
+        nameValue: '',
+        surnameValue: '',
+        dateOfBirthValue: '',
+        telephoneValue: '',
+        webSiteValue: '',
+        aboutMyselfValue: '',
+        technologyStackValue: '',
+        descriptionOfTheLatestProjectValue: '',
+      },
     };
     this.flag = false;
   }
@@ -38,11 +47,8 @@ class FormQuestionnaire extends React.Component {
         telephoneValue: '',
         webSiteValue: '',
         aboutMyselfValue: '',
-        aboutMyselfValueCount: '',
         technologyStackValue: '',
-        technologyStackValueCount: '',
         descriptionOfTheLatestProjectValue: '',
-        descriptionOfTheLatestProjectValueCount: ''
       }
     })
     event.preventDefault()
@@ -83,13 +89,15 @@ class FormQuestionnaire extends React.Component {
     }
 
     if(newObj.aboutMyselfValue.length > 600) {
-      newFormError.aboutMyselfValueCount = 'Превышен лимит символов в поле';
-    } else if(newObj.technologyStackValue.length > 600) {
-      newFormError.technologyStackValueCount = 'Превышен лимит символов в поле';
-    } else if(newObj.descriptionOfTheLatestProjectValue.length > 600) {
-      newFormError.descriptionOfTheLatestProjectValueCount = 'Превышен лимит символов в поле';
+      newFormError.aboutMyselfValue = 'Превышен лимит символов в поле';
     }
-    console.log(newFormError)
+    if(newObj.technologyStackValue.length > 600) {
+      newFormError.technologyStackValue = 'Превышен лимит символов в поле';
+    }
+    if(newObj.descriptionOfTheLatestProjectValue.length > 600) {
+      newFormError.descriptionOfTheLatestProjectValue = 'Превышен лимит символов в поле';
+    }
+
     this.setState({formErrors:newFormError});
 
     if(Object.keys(newFormError).length === 0) {
@@ -98,7 +106,6 @@ class FormQuestionnaire extends React.Component {
       this.flag = false;
     }
 
-    console.log(this.flag)
     event.preventDefault()
   }
 
@@ -110,7 +117,24 @@ class FormQuestionnaire extends React.Component {
               label: 'Имя',
               placeholder:"Имя", 
               value: this.state.nameValue,
-              onChange: (event) => this.setState({nameValue: event.target.value}),
+              onChange: (event) => {
+                if(event.target.value.charAt(0) !== event.target.value.charAt(0).toUpperCase()) {
+                  this.setState( prev => {
+                    return {
+                      ...prev,
+                      formErrors: {nameValue: 'Напишите с заглавной буквы'}
+                    }
+                  })
+                } else {
+                  this.setState( prev => {
+                    return {                      
+                      ...prev,
+                      formErrors: {nameValue: ''} 
+                    }
+                  })
+                this.setState({nameValue: event.target.value})
+                }
+              },
               formErrors: this.state.formErrors.nameValue
           },
           {
@@ -118,7 +142,24 @@ class FormQuestionnaire extends React.Component {
               label: 'Фамилия',
               placeholder:"Фамилия",
               value: this.state.surnameValue,
-              onChange: (event) => this.setState({surnameValue: event.target.value}),
+              onChange: (event) => {
+                if(event.target.value.charAt(0) !== event.target.value.charAt(0).toUpperCase()) {
+                  this.setState( prev => {
+                    return {
+                      ...prev,
+                      formErrors: {surnameValue: 'Напишите с заглавной буквы'}
+                    }
+                  })
+                } else {
+                  this.setState( prev => {
+                    return {                      
+                      ...prev,
+                      formErrors: {surnameValue: ''} 
+                    }
+                  })
+                this.setState({surnameValue: event.target.value})
+                }
+              },
               formErrors: this.state.formErrors.surnameValue
           },
           {
@@ -156,7 +197,14 @@ class FormQuestionnaire extends React.Component {
             rows: 7,
             placeholder: 'О себе',
             value: this.state.aboutMyselfValue,
-            onChange: (event) => this.setState({aboutMyselfValue: event.target.value}),
+            onChange: (event) => {
+              this.setState({aboutMyselfValue: event.target.value})
+              if(event.target.value.length > 600) {
+                this.setState({formErrors: {aboutMyselfValue: 'Превышен лимит символов в поле'}})
+              } else {
+                this.setState({formErrors: {aboutMyselfValue: ''}})
+              }
+            },
             formErrors: this.state.formErrors.aboutMyselfValue
           },
           {
@@ -164,7 +212,14 @@ class FormQuestionnaire extends React.Component {
             rows: 7,
             placeholder: 'Стек технологий',
             value: this.state.technologyStackValue,
-            onChange: (event) => this.setState({technologyStackValue: event.target.value}),
+            onChange: (event) => {
+              this.setState({technologyStackValue: event.target.value})
+              if(event.target.value.length > 600) {
+                this.setState({formErrors: {technologyStackValue: 'Превышен лимит символов в поле'}})
+              } else {
+                this.setState({formErrors: {technologyStackValue: ''}})
+              }
+            },
             formErrors: this.state.formErrors.technologyStackValue
           },
           {
@@ -172,7 +227,14 @@ class FormQuestionnaire extends React.Component {
             rows: 7,
             placeholder: 'Описание последнего проекта',
             value: this.state.descriptionOfTheLatestProjectValue,
-            onChange: (event) => this.setState({descriptionOfTheLatestProjectValue: event.target.value}),
+            onChange: (event) => {
+              this.setState({descriptionOfTheLatestProjectValue: event.target.value})
+              if(event.target.value.length > 600) {
+                this.setState({formErrors: {descriptionOfTheLatestProjectValue: 'Превышен лимит символов в поле'}})
+              } else {
+                this.setState({formErrors: {descriptionOfTheLatestProjectValue: ''}})
+              }
+            },
             formErrors: this.state.formErrors.descriptionOfTheLatestProjectValue
           },
       ]
