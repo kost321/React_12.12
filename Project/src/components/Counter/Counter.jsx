@@ -4,9 +4,7 @@ import React from "react";
 class Counter extends React.Component {
   render() {
     if(this.props.value.length  > 600) {
-      return (
-        <></>
-      )       
+      return null;   
     } else {
       return (
         <div>

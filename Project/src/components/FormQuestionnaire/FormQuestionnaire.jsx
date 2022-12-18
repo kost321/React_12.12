@@ -30,7 +30,7 @@ class FormQuestionnaire extends React.Component {
     };
     this.flag = false;
   }
-  dataCleans(event) {
+  cleanData(event) {
     this.setState({
       nameValue: '',
       surnameValue: '',
@@ -53,8 +53,8 @@ class FormQuestionnaire extends React.Component {
     })
     event.preventDefault()
   }
-  handleClick(event) {
-    
+
+  handleSubmit(event) {  
     let newObj = {
       nameValue: this.state.nameValue,
       surnameValue: this.state.surnameValue,
@@ -62,11 +62,8 @@ class FormQuestionnaire extends React.Component {
       telephoneValue: this.state.telephoneValue,
       webSiteValue: this.state.webSiteValue,
       aboutMyselfValue: this.state.aboutMyselfValue,
-      aboutMyselfValueCount: this.state.aboutMyselfValue,
       technologyStackValue: this.state.technologyStackValue,
-      technologyStackValueCount: this.state.technologyStackValue,
       descriptionOfTheLatestProjectValue: this.state.descriptionOfTheLatestProjectValue,
-      descriptionOfTheLatestProjectValueCount: this.state.descriptionOfTheLatestProjectValue
     }
 
     let newFormError = {};
@@ -82,19 +79,13 @@ class FormQuestionnaire extends React.Component {
       }
     }
 
-    if(newObj.nameValue.charAt(0) !== newObj.nameValue.charAt(0).toUpperCase()) {
-      newFormError.nameValue = 'Напишите с заглавной буквы';
-    } else if (newObj.surnameValue.charAt(0) !== newObj.surnameValue.charAt(0).toUpperCase()) {
-      newFormError.surnameValue = 'Напишите с заглавной буквы'
-    }
-
-    if(newObj.aboutMyselfValue.length > 600) {
+    if(this.state.aboutMyselfValue.length > 600) {
       newFormError.aboutMyselfValue = 'Превышен лимит символов в поле';
     }
-    if(newObj.technologyStackValue.length > 600) {
+    if(this.state.technologyStackValue.length > 600) {
       newFormError.technologyStackValue = 'Превышен лимит символов в поле';
     }
-    if(newObj.descriptionOfTheLatestProjectValue.length > 600) {
+    if(this.state.descriptionOfTheLatestProjectValue.length > 600) {
       newFormError.descriptionOfTheLatestProjectValue = 'Превышен лимит символов в поле';
     }
 
@@ -119,19 +110,19 @@ class FormQuestionnaire extends React.Component {
               value: this.state.nameValue,
               onChange: (event) => {
                 if(event.target.value.charAt(0) !== event.target.value.charAt(0).toUpperCase()) {
-                  this.setState( prev => {
-                    return {
-                      ...prev,
-                      formErrors: {nameValue: 'Напишите с заглавной буквы'}
+                  this.setState(prev => ({
+                    formErrors: {
+                      ...prev.formErrors,
+                      nameValue: 'Напишите с заглавной буквы'
                     }
-                  })
+                  }))
                 } else {
-                  this.setState( prev => {
-                    return {                      
-                      ...prev,
-                      formErrors: {nameValue: ''} 
+                  this.setState(prev => ({
+                    formErrors: {
+                      ...prev.formErrors,
+                      nameValue: ''
                     }
-                  })
+                  }))
                 this.setState({nameValue: event.target.value})
                 }
               },
@@ -144,19 +135,19 @@ class FormQuestionnaire extends React.Component {
               value: this.state.surnameValue,
               onChange: (event) => {
                 if(event.target.value.charAt(0) !== event.target.value.charAt(0).toUpperCase()) {
-                  this.setState( prev => {
-                    return {
-                      ...prev,
-                      formErrors: {surnameValue: 'Напишите с заглавной буквы'}
+                  this.setState(prev => ({
+                    formErrors: {
+                      ...prev.formErrors,
+                      surnameValue: 'Напишите с заглавной буквы'
                     }
-                  })
+                  }))
                 } else {
-                  this.setState( prev => {
-                    return {                      
-                      ...prev,
-                      formErrors: {surnameValue: ''} 
+                  this.setState(prev => ({
+                    formErrors: {
+                      ...prev.formErrors,
+                      surnameValue: ''
                     }
-                  })
+                  }))
                 this.setState({surnameValue: event.target.value})
                 }
               },
@@ -200,9 +191,19 @@ class FormQuestionnaire extends React.Component {
             onChange: (event) => {
               this.setState({aboutMyselfValue: event.target.value})
               if(event.target.value.length > 600) {
-                this.setState({formErrors: {aboutMyselfValue: 'Превышен лимит символов в поле'}})
+                this.setState(prev => ({
+                  formErrors: {
+                    ...prev.formErrors,
+                    aboutMyselfValue: 'Превышен лимит символов в поле'
+                  }
+                }))
               } else {
-                this.setState({formErrors: {aboutMyselfValue: ''}})
+                this.setState(prev => ({
+                  formErrors: {
+                    ...prev.formErrors,
+                    aboutMyselfValue: ''
+                  }
+                }))
               }
             },
             formErrors: this.state.formErrors.aboutMyselfValue
@@ -215,9 +216,19 @@ class FormQuestionnaire extends React.Component {
             onChange: (event) => {
               this.setState({technologyStackValue: event.target.value})
               if(event.target.value.length > 600) {
-                this.setState({formErrors: {technologyStackValue: 'Превышен лимит символов в поле'}})
+                this.setState(prev => ({
+                  formErrors: {
+                    ...prev.formErrors,
+                    technologyStackValue: 'Превышен лимит символов в поле'
+                  }
+                }))
               } else {
-                this.setState({formErrors: {technologyStackValue: ''}})
+                this.setState(prev => ({
+                  formErrors: {
+                    ...prev.formErrors,
+                    technologyStackValue: ''
+                  }
+                }))
               }
             },
             formErrors: this.state.formErrors.technologyStackValue
@@ -230,9 +241,19 @@ class FormQuestionnaire extends React.Component {
             onChange: (event) => {
               this.setState({descriptionOfTheLatestProjectValue: event.target.value})
               if(event.target.value.length > 600) {
-                this.setState({formErrors: {descriptionOfTheLatestProjectValue: 'Превышен лимит символов в поле'}})
+                this.setState(prev => ({
+                  formErrors: {
+                    ...prev.formErrors,
+                    descriptionOfTheLatestProjectValue: 'Превышен лимит символов в поле'
+                  }
+                }))
               } else {
-                this.setState({formErrors: {descriptionOfTheLatestProjectValue: ''}})
+                this.setState(prev => ({
+                  formErrors: {
+                    ...prev.formErrors,
+                    descriptionOfTheLatestProjectValue: ''
+                  }
+                }))
               }
             },
             formErrors: this.state.formErrors.descriptionOfTheLatestProjectValue
@@ -262,8 +283,8 @@ if(this.flag === true) {
         {formData.input.map((el,index) => <Input key={index} formErrors={el.formErrors} type={el.type} label={el.label} placeholder={el.placeholder} value={el.value} onChange={el.onChange}/>)}
         {formData.textArea.map((el,index) => <TextareaField key={index} formErrors={el.formErrors} label={el.label} rows={el.rows} placeholder={el.placeholder} value={el.value} onChange={el.onChange}/>)}   
         <div>
-          <input type="submit" value="Сохранить" onClick={this.handleClick.bind(this)}/>
-          <input type="submit" value="Отмена" onClick={this.dataCleans.bind(this)}/>
+          <input type="submit" value="Сохранить" onClick={this.handleSubmit.bind(this)}/>
+          <input type="submit" value="Отмена" onClick={this.cleanData.bind(this)}/>
         </div>
       </form>
     </>
