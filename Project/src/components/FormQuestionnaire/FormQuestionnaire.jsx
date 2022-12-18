@@ -62,7 +62,7 @@ function FormQuestionnaire() {
 
     let newFormError = {};
 
-    if(!newObj.webSiteValue.endsWith('https://', 8)) {
+    if(!newObj.webSiteValue.trim().endsWith('https://', 8)) {
       newFormError.webSiteValue = 'Строка должна начинаться с https://'
     }
 
@@ -73,13 +73,13 @@ function FormQuestionnaire() {
       }
     }
 
-    if(newObj.aboutMyselfValue.length > 600) {
+    if(aboutMyselfValue.length > 600) {
       newFormError.aboutMyselfValue = 'Превышен лимит символов в поле';
     }
-    if(newObj.technologyStackValue.length > 600) {
+    if(technologyStackValue.length > 600) {
       newFormError.technologyStackValue = 'Превышен лимит символов в поле';
     }
-    if(newObj.descriptionOfTheLatestProjectValue.length > 600) {
+    if(descriptionOfTheLatestProjectValue.length > 600) {
       newFormError.descriptionOfTheLatestProjectValue = 'Превышен лимит символов в поле';
     }
 
@@ -101,7 +101,8 @@ function FormQuestionnaire() {
             placeholder:"Имя", 
             value: nameValue,
             onChange: (event) => {
-              if(event.target.value.charAt(0) !== event.target.value.charAt(0).toUpperCase()) {
+              let newValue = event.target.value.trim();
+              if(newValue.charAt(0) !== newValue.charAt(0).toUpperCase()) {
                 setFormErrors( prev => {
                   return {
                     ...prev,
@@ -125,7 +126,8 @@ function FormQuestionnaire() {
             placeholder:"Фамилия",
             value: surnameValue,
             onChange: (event) => {
-              if(event.target.value.charAt(0) !== event.target.value.charAt(0).toUpperCase()) {
+              let newValue = event.target.value.trim();
+              if(newValue.charAt(0) !== newValue.charAt(0).toUpperCase()) {
                 setFormErrors( prev => {
                   return {
                     ...prev,
@@ -158,8 +160,8 @@ function FormQuestionnaire() {
             value: telephoneValue,
             onChange: (event) => {
               const x = event.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,4})(\d{0,2})(\d{0,2})/);
-              event.target.value =  + x[1] + (x[2] ? `-${x[2]}` : '') + (x[3] ? `-${x[3]}` : '') + (x[4] ? `-${x[4]}` : '');
-              setTelephoneValue(event.target.value)
+              event.target.value = x[1] + (x[2] ? `-${x[2]}` : '') + (x[3] ? `-${x[3]}` : '') + (x[4] ? `-${x[4]}` : '');
+              setTelephoneValue(event.target.value);
             },
             formErrors: formErrors.telephoneValue,
         },

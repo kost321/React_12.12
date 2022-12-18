@@ -7,7 +7,7 @@ function Input(props) {
     <label>
       {props.label}
       <input type={props.type} placeholder={props.placeholder} value={props.value} onChange={props.onChange} />
-      {props.formErrors}
+      <div className='error-field'>{props.formErrors}</div>
     </label>  
   )
 }

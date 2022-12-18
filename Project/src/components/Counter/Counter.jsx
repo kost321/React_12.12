@@ -3,10 +3,7 @@ import React from "react";
 
 function Counter(props) {
   if(props.value.length  > 600) {
-    return (
-      <>
-      </>
-      )       
+    return null;      
   } else {
     return (
       <div>
