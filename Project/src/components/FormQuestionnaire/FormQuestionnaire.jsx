@@ -30,6 +30,7 @@ class FormQuestionnaire extends React.Component {
     };
     this.flag = false;
   }
+
   cleanData(event) {
     this.setState({
       nameValue: '',
@@ -67,8 +68,7 @@ class FormQuestionnaire extends React.Component {
     }
 
     let newFormError = {};
-
-    if(!newObj.webSiteValue.endsWith('https://', 8)) {
+    if(!newObj.webSiteValue.trim().endsWith('https://', 8)) {
       newFormError.webSiteValue = 'Строка должна начинаться с https://'
     }
 
@@ -109,7 +109,8 @@ class FormQuestionnaire extends React.Component {
               placeholder:"Имя", 
               value: this.state.nameValue,
               onChange: (event) => {
-                if(event.target.value.charAt(0) !== event.target.value.charAt(0).toUpperCase()) {
+                let newValue = event.target.value.trim()
+                if(newValue.charAt(0) !== newValue.charAt(0).toUpperCase()) {
                   this.setState(prev => ({
                     formErrors: {
                       ...prev.formErrors,
@@ -134,7 +135,8 @@ class FormQuestionnaire extends React.Component {
               placeholder:"Фамилия",
               value: this.state.surnameValue,
               onChange: (event) => {
-                if(event.target.value.charAt(0) !== event.target.value.charAt(0).toUpperCase()) {
+                let newValue = event.target.value.trim()
+                if(newValue.charAt(0) !== newValue.charAt(0).toUpperCase()) {
                   this.setState(prev => ({
                     formErrors: {
                       ...prev.formErrors,
@@ -168,7 +170,7 @@ class FormQuestionnaire extends React.Component {
               value: this.state.telephoneValue,
               onChange: (event) => {
                 const x = event.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,4})(\d{0,2})(\d{0,2})/);
-                event.target.value =  + x[1] + (x[2] ? `-${x[2]}` : '') + (x[3] ? `-${x[3]}` : '') + (x[4] ? `-${x[4]}` : '');
+                event.target.value = x[1] + (x[2] ? `-${x[2]}` : '') + (x[3] ? `-${x[3]}` : '') + (x[4] ? `-${x[4]}` : '');
                 this.setState({telephoneValue: event.target.value})
               },
               formErrors: this.state.formErrors.telephoneValue,
