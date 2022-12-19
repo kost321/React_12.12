@@ -9,14 +9,16 @@ class FormQuestionnaire extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      nameValue: '',
-      surnameValue: '',
-      dateOfBirthValue: '',
-      telephoneValue: '',
-      webSiteValue: '',
-      aboutMyselfValue: '',
-      technologyStackValue: '',
-      descriptionOfTheLatestProjectValue: '',
+      values: {
+        nameValue: '',
+        surnameValue: '',
+        dateOfBirthValue: '',
+        telephoneValue: '',
+        webSiteValue: '',
+        aboutMyselfValue: '',
+        technologyStackValue: '',
+        descriptionOfTheLatestProjectValue: '',
+      },
       formErrors: {
         nameValue: '',
         surnameValue: '',
@@ -27,20 +29,22 @@ class FormQuestionnaire extends React.Component {
         technologyStackValue: '',
         descriptionOfTheLatestProjectValue: '',
       },
+      isSubmitted: false,
     };
-    this.flag = false;
   }
 
   cleanData(event) {
     this.setState({
-      nameValue: '',
-      surnameValue: '',
-      dateOfBirthValue: '',
-      telephoneValue: '',
-      webSiteValue: '',
-      aboutMyselfValue: '',
-      technologyStackValue: '',
-      descriptionOfTheLatestProjectValue: '',
+      values: {
+        nameValue: '',
+        surnameValue: '',
+        dateOfBirthValue: '',
+        telephoneValue: '',
+        webSiteValue: '',
+        aboutMyselfValue: '',
+        technologyStackValue: '',
+        descriptionOfTheLatestProjectValue: '',
+      },
       formErrors: {
         nameValue: '',
         surnameValue: '',
@@ -50,27 +54,25 @@ class FormQuestionnaire extends React.Component {
         aboutMyselfValue: '',
         technologyStackValue: '',
         descriptionOfTheLatestProjectValue: '',
-      }
+      },
+      isSubmitted: false,
     })
     event.preventDefault()
   }
 
   handleSubmit(event) {  
     let newObj = {
-      nameValue: this.state.nameValue,
-      surnameValue: this.state.surnameValue,
-      dateOfBirthValue: this.state.dateOfBirthValue,
-      telephoneValue: this.state.telephoneValue,
-      webSiteValue: this.state.webSiteValue,
-      aboutMyselfValue: this.state.aboutMyselfValue,
-      technologyStackValue: this.state.technologyStackValue,
-      descriptionOfTheLatestProjectValue: this.state.descriptionOfTheLatestProjectValue,
+      nameValue: this.state.values.nameValue,
+      surnameValue: this.state.values.surnameValue,
+      dateOfBirthValue: this.state.values.dateOfBirthValue,
+      telephoneValue: this.state.values.telephoneValue,
+      webSiteValue: this.state.values.webSiteValue,
+      aboutMyselfValue: this.state.values.aboutMyselfValue,
+      technologyStackValue: this.state.values.technologyStackValue,
+      descriptionOfTheLatestProjectValue: this.state.values.descriptionOfTheLatestProjectValue,
     }
 
     let newFormError = {};
-    if(!newObj.webSiteValue.trim().endsWith('https://', 8)) {
-      newFormError.webSiteValue = 'Строка должна начинаться с https://'
-    }
 
     for(let i in newObj) {
       newObj[i] = newObj[i].trim();
@@ -79,22 +81,12 @@ class FormQuestionnaire extends React.Component {
       }
     }
 
-    if(this.state.aboutMyselfValue.length > 600) {
-      newFormError.aboutMyselfValue = 'Превышен лимит символов в поле';
-    }
-    if(this.state.technologyStackValue.length > 600) {
-      newFormError.technologyStackValue = 'Превышен лимит символов в поле';
-    }
-    if(this.state.descriptionOfTheLatestProjectValue.length > 600) {
-      newFormError.descriptionOfTheLatestProjectValue = 'Превышен лимит символов в поле';
-    }
-
-    this.setState({formErrors:newFormError});
+    this.setState(prev => ({formErrors: {...prev.formErrors, ...newFormError}}));
 
     if(Object.keys(newFormError).length === 0) {
-      this.flag = true;
+      this.state.isSubmitted = true;
     } else {
-      this.flag = false;
+      this.state.isSubmitted = false;
     }
 
     event.preventDefault()
@@ -107,7 +99,7 @@ class FormQuestionnaire extends React.Component {
               type: 'text',
               label: 'Имя',
               placeholder:"Имя", 
-              value: this.state.nameValue,
+              value: this.state.values.nameValue,
               onChange: (event) => {
                 let newValue = event.target.value.trim()
                 if(newValue.charAt(0) !== newValue.charAt(0).toUpperCase()) {
@@ -122,9 +114,12 @@ class FormQuestionnaire extends React.Component {
                     formErrors: {
                       ...prev.formErrors,
                       nameValue: ''
+                    },
+                    values: {
+                      ...prev.values,
+                      nameValue: event.target.value
                     }
-                  }))
-                this.setState({nameValue: event.target.value})
+                  }));
                 }
               },
               formErrors: this.state.formErrors.nameValue
@@ -133,7 +128,7 @@ class FormQuestionnaire extends React.Component {
               type: 'text',
               label: 'Фамилия',
               placeholder:"Фамилия",
-              value: this.state.surnameValue,
+              value: this.state.values.surnameValue,
               onChange: (event) => {
                 let newValue = event.target.value.trim()
                 if(newValue.charAt(0) !== newValue.charAt(0).toUpperCase()) {
@@ -148,9 +143,12 @@ class FormQuestionnaire extends React.Component {
                     formErrors: {
                       ...prev.formErrors,
                       surnameValue: ''
+                    },
+                    values: {
+                      ...prev.values,
+                      surnameValue: event.target.value
                     }
-                  }))
-                this.setState({surnameValue: event.target.value})
+                  }));
                 }
               },
               formErrors: this.state.formErrors.surnameValue
@@ -159,19 +157,19 @@ class FormQuestionnaire extends React.Component {
               type: 'date',
               label: 'Дата рождения',
               placeholder:"Дата рождения",
-              value: this.state.dateOfBirthValue,
-              onChange: (event) => this.setState({dateOfBirthValue: event.target.value}),
+              value: this.state.values.dateOfBirthValue,
+              onChange: (event) => this.setState(prev => ({values: {...prev.values, dateOfBirthValue: event.target.value}})),
               formErrors: this.state.formErrors.dateOfBirthValue
           },
           {
               type: 'text',
               label: 'Телефон',
               placeholder:"Телефон",
-              value: this.state.telephoneValue,
+              value: this.state.values.telephoneValue,
               onChange: (event) => {
                 const x = event.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,4})(\d{0,2})(\d{0,2})/);
                 event.target.value = x[1] + (x[2] ? `-${x[2]}` : '') + (x[3] ? `-${x[3]}` : '') + (x[4] ? `-${x[4]}` : '');
-                this.setState({telephoneValue: event.target.value})
+                this.setState(prev => ({values: {...prev.values, telephoneValue: event.target.value}}))
               },
               formErrors: this.state.formErrors.telephoneValue,
           },
@@ -179,8 +177,28 @@ class FormQuestionnaire extends React.Component {
               type: 'text',
               label: 'Сайт',
               placeholder: 'Сайт',
-              value: this.state.webSiteValue,
-              onChange: (event) => this.setState({webSiteValue: event.target.value}),
+              value: this.state.values.webSiteValue,
+              onChange: (event) => {
+                if(!'https://'.startsWith(event.target.value.trim().substr(0, 8))) {
+                  this.setState(prev => ({
+                    formErrors: {
+                      ...prev.formErrors,
+                      webSiteValue: 'Строка должна начинаться с https://'
+                    }
+                  }))
+                } else {
+                  this.setState(prev => ({
+                    formErrors: {
+                      ...prev.formErrors,
+                      webSiteValue: ''
+                    },
+                    values: {
+                      ...prev.values,
+                      webSiteValue: event.target.value
+                    }
+                  }));
+                }
+              },
               formErrors: this.state.formErrors.webSiteValue
           },
       ],
@@ -189,9 +207,9 @@ class FormQuestionnaire extends React.Component {
             label: 'О себе',
             rows: 7,
             placeholder: 'О себе',
-            value: this.state.aboutMyselfValue,
+            value: this.state.values.aboutMyselfValue,
             onChange: (event) => {
-              this.setState({aboutMyselfValue: event.target.value})
+              this.setState(prev => ({values: {...prev.values, aboutMyselfValue: event.target.value}}));
               if(event.target.value.length > 600) {
                 this.setState(prev => ({
                   formErrors: {
@@ -214,9 +232,9 @@ class FormQuestionnaire extends React.Component {
             label: 'Стек технологий',
             rows: 7,
             placeholder: 'Стек технологий',
-            value: this.state.technologyStackValue,
+            value: this.state.values.technologyStackValue,
             onChange: (event) => {
-              this.setState({technologyStackValue: event.target.value})
+              this.setState(prev => ({values: {...prev.values, technologyStackValue: event.target.value}}));
               if(event.target.value.length > 600) {
                 this.setState(prev => ({
                   formErrors: {
@@ -239,9 +257,9 @@ class FormQuestionnaire extends React.Component {
             label: 'Описание последнего проекта',
             rows: 7,
             placeholder: 'Описание последнего проекта',
-            value: this.state.descriptionOfTheLatestProjectValue,
+            value: this.state.values.descriptionOfTheLatestProjectValue,
             onChange: (event) => {
-              this.setState({descriptionOfTheLatestProjectValue: event.target.value})
+              this.setState(prev => ({values: {...prev.values, descriptionOfTheLatestProjectValue: event.target.value}}));
               if(event.target.value.length > 600) {
                 this.setState(prev => ({
                   formErrors: {
@@ -263,18 +281,17 @@ class FormQuestionnaire extends React.Component {
       ]
   };  
 
-if(this.flag === true) {
+if(this.state.isSubmitted === true) {
   return (
     <UserProfile 
-      name={this.state.nameValue} 
-      surname={this.state.surnameValue} 
-      dateOfBirth={this.state.dateOfBirthValue} 
-      telephone={this.state.telephoneValue}
-      webSite={this.state.webSiteValue}
-      aboutMyself={this.state.aboutMyselfValue}
-      technologyStack={this.state.technologyStackValue}
-      descriptionOfTheLatestProject={this.state.descriptionOfTheLatestProjectValue}
-      flag={this.state.flag}
+      name={this.state.values.nameValue} 
+      surname={this.state.values.surnameValue} 
+      dateOfBirth={this.state.values.dateOfBirthValue} 
+      telephone={this.state.values.telephoneValue}
+      webSite={this.state.values.webSiteValue}
+      aboutMyself={this.state.values.aboutMyselfValue}
+      technologyStack={this.state.values.technologyStackValue}
+      descriptionOfTheLatestProject={this.state.values.descriptionOfTheLatestProjectValue}
       />
   )
 } else {
