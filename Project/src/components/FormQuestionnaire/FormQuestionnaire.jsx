@@ -24,7 +24,7 @@ function FormQuestionnaire() {
     technologyStackValue: '',
     descriptionOfTheLatestProjectValue: '',
   });
-  const [flag, setFlag] = useState(false);
+  const [isSubmitted, setSubmitted] = useState(false);
 
   function dataCleans(event) {
     setNameValue('');
@@ -45,6 +45,7 @@ function FormQuestionnaire() {
       technologyStackValue: '',
       descriptionOfTheLatestProjectValue: '',
     });
+    setSubmitted(false)
     event.preventDefault()
   }
   
@@ -62,15 +63,15 @@ function FormQuestionnaire() {
 
     let newFormError = {};
 
-    if(!newObj.webSiteValue.trim().endsWith('https://', 8)) {
-      newFormError.webSiteValue = 'Строка должна начинаться с https://'
-    }
-
     for(let i in newObj) {
       newObj[i] = newObj[i].trim();
       if(newObj[i] === "") {
         newFormError[i] = 'Поле пустое. Заполните пожалуйста';
       }
+    }
+    
+    if(!newObj.webSiteValue.trim().endsWith('https://', 8)) {
+      newFormError.webSiteValue = 'Строка должна начинаться с https://'
     }
 
     if(aboutMyselfValue.length > 600) {
@@ -83,12 +84,13 @@ function FormQuestionnaire() {
       newFormError.descriptionOfTheLatestProjectValue = 'Превышен лимит символов в поле';
     }
 
-    setFormErrors(newFormError);
+    setFormErrors({...newFormError});
 
-    if(Object.keys(formErrors).length === 0) {
-      setFlag(true);
+    console.log(newFormError)
+    if(Object.keys(newFormError).length === 0) {
+      setSubmitted(true);
     } else {
-      setFlag(false);
+      setSubmitted(false);
     }
     event.preventDefault()
   }
@@ -170,7 +172,24 @@ function FormQuestionnaire() {
             label: 'Сайт',
             placeholder: 'Сайт',
             value: webSiteValue,
-            onChange: (event) => setWebSiteValue(event.target.value),
+            onChange: (event) => {
+              if(!'https://'.startsWith(event.target.value.trim().substr(0, 8))) {
+                setFormErrors(prev => {
+                  return {
+                    ...prev,
+                    webSiteValue: 'Строка должна начинаться с https://'
+                  }
+                })
+              } else {
+                setFormErrors(prev => {
+                  return {
+                    ...prev,
+                    webSiteValue: ''
+                  }
+                })
+              }
+            setWebSiteValue(event.target.value)
+            },
             formErrors: formErrors.webSiteValue
         },
     ],
@@ -253,7 +272,7 @@ function FormQuestionnaire() {
     ]
 };  
   
-if(flag === true) {
+if(isSubmitted === true) {
   return (
     <UserProfile 
       name={nameValue} 
@@ -264,7 +283,7 @@ if(flag === true) {
       aboutMyself={aboutMyselfValue}
       technologyStack={technologyStackValue}
       descriptionOfTheLatestProject={descriptionOfTheLatestProjectValue}
-      flag={flag}
+      isSubmitted={isSubmitted}
       />
   )
 } else {
