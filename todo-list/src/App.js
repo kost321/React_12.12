@@ -1,11 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import TodosList from './components/TodosList/TodosList';
+import AddTodo from './components/AddTodo/AddTodo';
 
-function App() {
+export default function App() {
   return (
-    <></>
+    <>
+      <AddTodo />
+      <TodosList />
+    </>
   );
 }
-
-export default App;

@@ -5,26 +5,40 @@ import {
     EDIT_TODO,
     UPDATE_TODO,
     MARK_COMPLETED,
-  } from "../actions/actionsTypes";
+  } from "../actions/actionTypes";
   
-  const initialState = {
-    todos: [],
-    isEdit: false,
-    editTodoId: "",
-  };
+//   const initialState = {
+//     todos: [{
+//       id: Date.now(),
+//       complete: false,
+//       text: ""
+//     }],
+//     isEdit: false,
+//     editTodoId: "",
+//   };
+
+const initialState = {
+    todos: []
+}
   
-  const todoReducer = (state = initialState, action , type, payload ) => {
-    switch (type) {
+  const todoReducer = (state = initialState, action) => {
+
+    switch (action.type) {
       case ADD_TODO:
-        const {id, content} = action.payload;
-        return [
-            ...state,
+
+      const{id, text, complelted} = action.payload;
+
+        return {
+          ...state,
+          data: [
+            ...state.todos,
             {
-              id: action.id,
-              complete: action.complete,
-              text: action.text
-            }
-        ];
+              id:id,
+              text: text,
+              complelted: complelted
+          }]
+
+        };
     //   case DELETE_TODO:
     //     const newTodoList = state.todos.filter((item) => item.id != action.id);
     //     return {
