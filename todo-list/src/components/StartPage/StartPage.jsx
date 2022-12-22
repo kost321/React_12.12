@@ -15,8 +15,8 @@ export const StartPage = () => {
         dispatch(addNewName(nameValue));
         navigate('/todolist')
         setNameValue('');
-        console.log(name)
     };
+
     return (
         <div className="main-div">
             <div>{name.text}</div>

@@ -2,7 +2,6 @@ import {
     ADD_NAME,
     ADD_TODO,
     DELETE_TODO,
-    CLEAR_ALL_TODO,
     EDIT_TODO,
     UPDATE_TODO,
     MARK_COMPLETED,
@@ -23,7 +22,6 @@ import {
       payload: {
         id: Date.now(),
         text: text,
-        completed: false
       },
     };
   };
@@ -41,20 +39,18 @@ import {
       payload: {
         id: id,
       },
-      isEdit: true,
     };
   };
   
-//   export const updateTodo = (id, todo) => {
-//     return {
-//       type: UPDATE_TODO,
-//       payload: {
-//         todoId: id,
-//         todoTitle: todo?.title,
-//         todoDescription: todo?.description,
-//       },
-//     };
-//   };
+  export const updateTodo = (id, text,state) => {
+    return {
+      type: UPDATE_TODO,
+      payload: {
+        todoId: id,
+        todoText: text,
+      },
+    };
+  };
   
 //   export const markTodoCompleted = (id) => {
 //     return {

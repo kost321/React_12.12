@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addNewTodo } from "../../redux/actions";
 import TodosList from "../TodosList/TodosList";
-import { selecteName } from "../../redux/selectors/todoSelectors";
+import { selecteName, selectTodos } from "../../redux/selectors/todoSelectors";
 
 import './addTodo.css'
 
@@ -10,16 +10,19 @@ export const AddTodo = () => {
     const dispatch = useDispatch();
     const [text, setText] = useState('');
     const name = useSelector(selecteName);
-
+    const todos = useSelector(selectTodos);
 
     const handleAdd = () => {
         dispatch(addNewTodo(text));
         setText('');
     };
-    console.log(name)
+
     return (
         <>
-            <h2>{name.text}</h2>
+            <div className="information-block">
+                <h2>{name.text}</h2>
+                <h4>Активные задачи:{todos.length}</h4>
+            </div>    
             <div className="main-div">
                 <input type="text" placeholder="Add a New Task" value={text} onChange={event => setText(event.target.value)} />
                 <button className="add-btn" onClick={() => handleAdd()}>Add</button>
