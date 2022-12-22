@@ -1,4 +1,5 @@
 import {
+    ADD_NAME,
     ADD_TODO,
     DELETE_TODO,
     CLEAR_ALL_TODO,
@@ -17,20 +18,33 @@ import {
 //     editTodoId: "",
 //   };
 
+
+
 const initialState = {
     todos: []
 }
+
+
+export const nameReduccer = (state = initialState, action) => {
+  if(action.type === ADD_NAME) {
+    let name = action.payload;
+    return {
+      ...state,
+      todos: name 
+    }
+  } else {
+    return state;
+  }
+}
   
-  const todoReducer = (state = initialState, action) => {
+export const todoReducer = (state = initialState, action) => {
 
     switch (action.type) {
       case ADD_TODO:
-
       const{id, text, complelted} = action.payload;
-
         return {
           ...state,
-          data: [
+          todos: [
             ...state.todos,
             {
               id:id,
@@ -39,21 +53,31 @@ const initialState = {
           }]
 
         };
-    //   case DELETE_TODO:
-    //     const newTodoList = state.todos.filter((item) => item.id != action.id);
-    //     return {
-    //       ...state,
-    //       todos: newTodoList,
-    //     };
+
+      // case ADD_NAME:
+      //   let name = action.payload;
+      //   console.log(name)
+      //   return {
+      //     ...state,
+      //     todos: name
+      //   };        
+
+      case DELETE_TODO:
+        const newTodoList = state.todos.filter((item) => item.id !== action.id);
+        return {
+          ...state,
+          todos: newTodoList,
+        };
   
-    //   case EDIT_TODO:
-    //     const editTodo = action.payload;
-    //     let newEditTodo = state?.todos?.find((item) => item?.id === editTodo?.id);
-    //     return {
-    //       ...state,
-    //       isEdit: action.isEdit,
-    //       editTodo: newEditTodo,
-    //     };
+      case EDIT_TODO:
+        const editTodo = action.payload;
+        let newEditTodo = state?.todos?.find((item) => item?.id === editTodo?.id);
+        debugger
+        return {
+          ...state,
+          isEdit: action.isEdit,
+          editTodo: newEditTodo,
+        };
   
     //   case UPDATE_TODO:
     //     const { todoId, todoTitle, todoDescription } = action.payload;
@@ -97,14 +121,8 @@ const initialState = {
     //       isEdit: false,
     //     };
   
-    //   case CLEAR_ALL_TODO:
-    //     return {
-    //       ...state,
-    //       todos: [],
-    //     };
   
       default:
         return state;
     }
   };
-  export default todoReducer;

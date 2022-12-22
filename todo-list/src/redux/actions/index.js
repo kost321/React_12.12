@@ -1,4 +1,5 @@
 import {
+    ADD_NAME,
     ADD_TODO,
     DELETE_TODO,
     CLEAR_ALL_TODO,
@@ -7,8 +8,16 @@ import {
     MARK_COMPLETED,
   } from "./actionTypes";
   
-  export const addNewTodo = (text) => {
+  export const addNewName = (text) => {
+    return {
+      type: ADD_NAME,
+      payload: {
+        text: text,
+      },
+    };
+  };
 
+  export const addNewTodo = (text) => {
     return {
       type: ADD_TODO,
       payload: {
@@ -18,28 +27,23 @@ import {
       },
     };
   };
-//   export const deleteTodo = (id) => {
-//     return {
-//       type: DELETE_TODO,
-//       id,
-//     };
-//   };
+  export const deleteTodo = (id) => {
+    return {
+      type: DELETE_TODO,
+      id,
+    };
+  };
   
-//   export const clearAlltodo = () => {
-//     return {
-//       type: CLEAR_ALL_TODO,
-//     };
-//   };
   
-//   export const editTodo = (id) => {
-//     return {
-//       type: EDIT_TODO,
-//       payload: {
-//         id: id,
-//       },
-//       isEdit: true,
-//     };
-//   };
+  export const editTodo = (id) => {
+    return {
+      type: EDIT_TODO,
+      payload: {
+        id: id,
+      },
+      isEdit: true,
+    };
+  };
   
 //   export const updateTodo = (id, todo) => {
 //     return {

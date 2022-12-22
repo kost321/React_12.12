@@ -1,0 +1,40 @@
+.main-div {
+    position: relative;
+    height: 52px;
+    padding: 0 25px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.main-div input {
+    height: 100%;
+    width: 75%;
+    outline: none;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 0 10px 0 20px;
+    border: 1px solid #999;
+}
+
+.main-div input:focus,
+.main-div input.active {
+  border: 2px solid #f12711;
+}
+
+.add-btn{
+    width: 20%;
+    border: none;
+    opacity: 0.6;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 7px 13px;
+    border-radius: 4px;
+    letter-spacing: 0.3px;
+    transition: transform 0.25s ease;
+    background: linear-gradient(135deg, #f5af19 0%, #f12711 100%);
+}
+

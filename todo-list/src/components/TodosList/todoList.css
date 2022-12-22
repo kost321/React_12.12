@@ -1,0 +1,45 @@
+.container-todo{
+    max-height: 350px;
+    overflow: auto;
+}
+
+.task-box{
+    margin-top: 20px;
+    margin-right: 5px;
+    padding: 0 20px 10px 25px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.task {
+    width: 75%;
+    display: flex;
+    align-items:center;
+}
+
+.settings{
+position: relative;   
+}
+
+.task input{
+    margin-right: 20px;
+}
+
+.task h3{
+    width: 85%;
+    word-wrap: break-word;
+}
+
+.delete-btn{
+    border: none;
+    opacity: 0.6;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 7px 13px;
+    border-radius: 4px;
+    letter-spacing: 0.3px;
+    transition: transform 0.25s ease;
+    background: linear-gradient(135deg, #0018a7eb 0%, #f12711 100%);
+}
