@@ -4,7 +4,7 @@ import {
     DELETE_TODO,
     EDIT_TODO,
     UPDATE_TODO,
-    MARK_COMPLETED,
+    MARK_COMPLETED
   } from "./actionTypes";
   
   export const addNewName = (text) => {
@@ -22,6 +22,7 @@ import {
       payload: {
         id: Date.now(),
         text: text,
+        isActiv : true
       },
     };
   };
@@ -42,7 +43,7 @@ import {
     };
   };
   
-  export const updateTodo = (id, text,state) => {
+  export const updateTodo = (id, text) => {
     return {
       type: UPDATE_TODO,
       payload: {
@@ -52,11 +53,13 @@ import {
     };
   };
   
-//   export const markTodoCompleted = (id) => {
-//     return {
-//       type: MARK_COMPLETED,
-//       payload: {
-//         selectedTodoId: id
-//       }
-//     }
-//   }
+  export const markTodoCompleted = (id,isActiv) => {
+    return {
+      type: MARK_COMPLETED,
+      payload: {
+        todoIdComplet: id,
+        todoIsActiv: isActiv
+      }
+    }
+  }
+  

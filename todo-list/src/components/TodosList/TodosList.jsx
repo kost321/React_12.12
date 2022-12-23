@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectTodos, editTodos } from '../../redux/selectors/todoSelectors'
-import { deleteTodo } from "../../redux/actions";
-import { editTodo } from "../../redux/actions";
-import { updateTodo } from "../../redux/actions";
+import { updateTodo,editTodo,deleteTodo,addNewTodo,markTodoCompleted } from "../../redux/actions";
 
 import './todoList.css'
 
 const TodosList = () => {
     const [edit, setEdit] = useState (false);
+    const [isActiv,setIsActiv] = useState(true);
     const todos = useSelector(selectTodos);
     const changeEditTodo = useSelector(editTodos)
     const [text, setText] = useState()
@@ -17,7 +16,7 @@ const TodosList = () => {
     const handleEdit = (id) => {
       setEdit(true);
       dispatch(editTodo(id));
-  };    
+    };
 
     const handleUpdateTodo = (id) => {
       if(text === undefined) {
@@ -26,7 +25,18 @@ const TodosList = () => {
         dispatch(updateTodo(id,text,todos));
         setEdit(false)
       }
-      
+    }
+    
+    const handleClick = (id,event) => {
+      let addClass = event.target.classList.toggle("crossed-line");
+      if(addClass) {
+        debugger
+        setIsActiv(false)
+      } else {
+        debugger
+        setIsActiv(true)
+      }
+      dispatch(markTodoCompleted(id,isActiv))
     }
 
     return (
@@ -41,8 +51,8 @@ const TodosList = () => {
             }) : todos.map(todo=> {
               return (
                 <div className="task-box" key={todo.id}>
-                  <div className="task" >
-                    <h3>{todo.text}</h3>
+                  <div className="task">
+                    <h3 onClick = {(event) => handleClick(todo.id, event)}>{todo.text}</h3>
                   </div>
                   <div className="settings">
                     <button className="delete-btn" onClick={() => dispatch(deleteTodo(todo.id))}>Delete</button>

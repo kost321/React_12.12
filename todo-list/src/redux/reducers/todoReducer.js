@@ -2,14 +2,13 @@ import {
     ADD_NAME,
     ADD_TODO,
     DELETE_TODO,
-    CLEAR_ALL_TODO,
     EDIT_TODO,
     UPDATE_TODO,
-    MARK_COMPLETED,
+    MARK_COMPLETED
   } from "../actions/actionTypes";
 
 const initialState = {
-    todoName: [],
+    todoName: '',
     todos: [],
     editTodo: []
 }
@@ -39,6 +38,7 @@ export const todoReducer = (state = initialState, action) => {
             {
               id:id,
               text: text,
+              isActiv: true,
             }
           ]
         };      
@@ -72,30 +72,21 @@ export const todoReducer = (state = initialState, action) => {
           todos: [...todos],
         };
   
-    //   case MARK_COMPLETED:
-    //     const { selectedTodoId } = action.payload;
-    //     let allTodos = [];
-  
-    //     selectedTodoId.forEach((id) => {
-    //       allTodos = state.todos.filter((todo) => {
-    //         return todo.id !== id;
-    //       });
-  
-    //       const selectedTodo = state.todos.find((todo) => todo?.id === id);
-    //       selectedTodo.title = selectedTodo?.title;
-    //       selectedTodo.description = selectedTodo?.description;
-    //       selectedTodo.isCompleted = true;
-    //       selectedTodo.isPending = selectedTodo?.isPending;
-    //       allTodos.push(selectedTodo);
-    //     });
-  
-    //     return {
-    //       ...state,
-    //       todos: [...allTodos],
-    //       isEdit: false,
-    //     };
-  
-  
+        case MARK_COMPLETED:
+          const { todoIdComplet,todoIsActiv } = action.payload;
+          console.log(todoIsActiv)
+          const completTodos = state.todos.filter((todo) => {
+            return todo.id !== todoIdComplet;
+          });
+          const completTodo = state.todos.find((todo) => todo?.id === todoIdComplet);
+          completTodo.isActiv = todoIsActiv;
+          completTodos.push(completTodo);
+          debugger
+          return {
+            ...state,
+            todos: [...completTodos],
+          };
+
       default:
         return state;
     }

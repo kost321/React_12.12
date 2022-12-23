@@ -6,6 +6,11 @@
 
 }
 
+.count-input{
+    outline: none;
+    border: none;
+}
+
 .main-div {
     position: relative;
     height: 52px;

@@ -11,6 +11,7 @@ export const AddTodo = () => {
     const [text, setText] = useState('');
     const name = useSelector(selecteName);
     const todos = useSelector(selectTodos);
+    const [count, setCount] = useState();
 
     const handleAdd = () => {
         dispatch(addNewTodo(text));
@@ -21,7 +22,7 @@ export const AddTodo = () => {
         <>
             <div className="information-block">
                 <h2>{name.text}</h2>
-                <h4>Активные задачи:{todos.length}</h4>
+                <input className="count-input" value={`Активные задачи:${todos.length}`} readOnly/>
             </div>    
             <div className="main-div">
                 <input type="text" placeholder="Add a New Task" value={text} onChange={event => setText(event.target.value)} />
