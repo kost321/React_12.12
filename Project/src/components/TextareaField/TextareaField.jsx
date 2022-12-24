@@ -3,20 +3,17 @@ import Counter from "../Counter/Counter";
 
 import './textareaField.css'
 
-class TextareaField extends React.Component {
-
-  render() {
-    return (
-      <label>
-        {this.props.label}
-        <textarea autoFocus rows={this.props.rows} type="text" placeholder={this.props.placeholder} value={this.props.value} onChange={this.props.onChange}/>        
-          <div className='additional-information'>
-            <div className='error-field'>{this.props.formErrors}</div>
-            <Counter value={this.props.value} maxLength={600}/>
-          </div>
-      </label>
-    )
-  }  
+function TextareaField(props) {
+  return (
+    <label>
+      {props.label}
+      <textarea autoFocus rows={props.rows} type="text" placeholder={props.placeholder} value={props.value} onChange={props.onChange}/>        
+        <div className='additional-information'>
+          <div className='error-field'>{props.formErrors}</div>
+          <Counter formErrors={props.formErrors} value={props.value} max={600}/>
+        </div>
+    </label>
+  )  
 }
 
 export default TextareaField;

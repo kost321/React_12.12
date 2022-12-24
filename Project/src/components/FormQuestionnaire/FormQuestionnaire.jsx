@@ -1,75 +1,64 @@
-import React from "react";
+import React, {useState} from "react";
 import Input from "../Input/Input";
 import TextareaField from "../TextareaField/TextareaField"
 import UserProfile from "../UserProfile/UserProfile";
 
 import './formQuestionnaire.css'
 
-class FormQuestionnaire extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      values: {
-        nameValue: '',
-        surnameValue: '',
-        dateOfBirthValue: '',
-        telephoneValue: '',
-        webSiteValue: '',
-        aboutMyselfValue: '',
-        technologyStackValue: '',
-        descriptionOfTheLatestProjectValue: '',
-      },
-      formErrors: {
-        nameValue: '',
-        surnameValue: '',
-        dateOfBirthValue: '',
-        telephoneValue: '',
-        webSiteValue: '',
-        aboutMyselfValue: '',
-        technologyStackValue: '',
-        descriptionOfTheLatestProjectValue: '',
-      },
-      isSubmitted: false,
-    };
-  }
+function FormQuestionnaire() {
+  const [nameValue,setNameValue] = useState('');
+  const [surnameValue, setSurnameValue] = useState('');
+  const [dateOfBirthValue, setDateOfBirthValue] = useState('');
+  const [telephoneValue, setTelephoneValue] = useState('');
+  const [webSiteValue,setWebSiteValue] = useState('');
+  const [aboutMyselfValue,setAboutMyselfValue] = useState('');
+  const [technologyStackValue, setTechnologyStackValue] = useState('');
+  const [descriptionOfTheLatestProjectValue, setDescriptionOfTheLatestProjectValue] = useState('');
+  const [formErrors, setFormErrors] = useState({
+    nameValue: '',
+    surnameValue: '',
+    dateOfBirthValue: '',
+    telephoneValue: '',
+    webSiteValue: '',
+    aboutMyselfValue: '',
+    technologyStackValue: '',
+    descriptionOfTheLatestProjectValue: '',
+  });
+  const [isSubmitted, setSubmitted] = useState(false);
 
-  cleanData(event) {
-    this.setState({
-      values: {
-        nameValue: '',
-        surnameValue: '',
-        dateOfBirthValue: '',
-        telephoneValue: '',
-        webSiteValue: '',
-        aboutMyselfValue: '',
-        technologyStackValue: '',
-        descriptionOfTheLatestProjectValue: '',
-      },
-      formErrors: {
-        nameValue: '',
-        surnameValue: '',
-        dateOfBirthValue: '',
-        telephoneValue: '',
-        webSiteValue: '',
-        aboutMyselfValue: '',
-        technologyStackValue: '',
-        descriptionOfTheLatestProjectValue: '',
-      },
-      isSubmitted: false,
-    })
+ let dataCleans = (event) => {
+    setNameValue('');
+    setSurnameValue('');
+    setDateOfBirthValue('');
+    setTelephoneValue('');
+    setWebSiteValue('');
+    setAboutMyselfValue('');
+    setTechnologyStackValue('');
+    setDescriptionOfTheLatestProjectValue('');
+    setFormErrors({
+      nameValue: '',
+      surnameValue: '',
+      dateOfBirthValue: '',
+      telephoneValue: '',
+      webSiteValue: '',
+      aboutMyselfValue: '',
+      technologyStackValue: '',
+      descriptionOfTheLatestProjectValue: '',
+    });
+    setSubmitted(false)
     event.preventDefault()
   }
-
-  handleSubmit(event) {  
+  
+let handleClick = (event) => {
     let newObj = {
-      nameValue: this.state.values.nameValue,
-      surnameValue: this.state.values.surnameValue,
-      dateOfBirthValue: this.state.values.dateOfBirthValue,
-      telephoneValue: this.state.values.telephoneValue,
-      webSiteValue: this.state.values.webSiteValue,
-      aboutMyselfValue: this.state.values.aboutMyselfValue,
-      technologyStackValue: this.state.values.technologyStackValue,
-      descriptionOfTheLatestProjectValue: this.state.values.descriptionOfTheLatestProjectValue,
+      nameValue: nameValue,
+      surnameValue: surnameValue,
+      dateOfBirthValue: dateOfBirthValue,
+      telephoneValue: telephoneValue,
+      webSiteValue: webSiteValue,
+      aboutMyselfValue: aboutMyselfValue,
+      technologyStackValue: technologyStackValue,
+      descriptionOfTheLatestProjectValue: descriptionOfTheLatestProjectValue,
     }
 
     let newFormError = {};
@@ -80,218 +69,220 @@ class FormQuestionnaire extends React.Component {
         newFormError[i] = 'Поле пустое. Заполните пожалуйста';
       }
     }
-
-    this.setState(prev => ({formErrors: {...prev.formErrors, ...newFormError}}));
-
-    if(Object.keys(newFormError).length === 0) {
-      this.state.isSubmitted = true;
-    } else {
-      this.state.isSubmitted = false;
+    
+    if(!newObj.webSiteValue.trim().endsWith('https://', 8)) {
+      newFormError.webSiteValue = 'Строка должна начинаться с https://'
     }
 
+    if(aboutMyselfValue.length > 600) {
+      newFormError.aboutMyselfValue = 'Превышен лимит символов в поле';
+    }
+    if(technologyStackValue.length > 600) {
+      newFormError.technologyStackValue = 'Превышен лимит символов в поле';
+    }
+    if(descriptionOfTheLatestProjectValue.length > 600) {
+      newFormError.descriptionOfTheLatestProjectValue = 'Превышен лимит символов в поле';
+    }
+
+    setFormErrors({...newFormError});
+
+    if(Object.keys(newFormError).length === 0) {
+      setSubmitted(true);
+    } else {
+      setSubmitted(false);
+    }
     event.preventDefault()
   }
-
-  render() {
-    const formData = {
-      input: [
-          {
-              type: 'text',
-              label: 'Имя',
-              placeholder:"Имя", 
-              value: this.state.values.nameValue,
-              onChange: (event) => {
-                let newValue = event.target.value.trim()
-                if(newValue.charAt(0) !== newValue.charAt(0).toUpperCase()) {
-                  this.setState(prev => ({
-                    formErrors: {
-                      ...prev.formErrors,
-                      nameValue: 'Напишите с заглавной буквы'
-                    }
-                  }))
-                } else {
-                  this.setState(prev => ({
-                    formErrors: {
-                      ...prev.formErrors,
-                      nameValue: ''
-                    },
-                    values: {
-                      ...prev.values,
-                      nameValue: event.target.value
-                    }
-                  }));
-                }
-              },
-              formErrors: this.state.formErrors.nameValue
-          },
-          {
-              type: 'text',
-              label: 'Фамилия',
-              placeholder:"Фамилия",
-              value: this.state.values.surnameValue,
-              onChange: (event) => {
-                let newValue = event.target.value.trim()
-                if(newValue.charAt(0) !== newValue.charAt(0).toUpperCase()) {
-                  this.setState(prev => ({
-                    formErrors: {
-                      ...prev.formErrors,
-                      surnameValue: 'Напишите с заглавной буквы'
-                    }
-                  }))
-                } else {
-                  this.setState(prev => ({
-                    formErrors: {
-                      ...prev.formErrors,
-                      surnameValue: ''
-                    },
-                    values: {
-                      ...prev.values,
-                      surnameValue: event.target.value
-                    }
-                  }));
-                }
-              },
-              formErrors: this.state.formErrors.surnameValue
-          },
-          {
-              type: 'date',
-              label: 'Дата рождения',
-              placeholder:"Дата рождения",
-              value: this.state.values.dateOfBirthValue,
-              onChange: (event) => this.setState(prev => ({values: {...prev.values, dateOfBirthValue: event.target.value}})),
-              formErrors: this.state.formErrors.dateOfBirthValue
-          },
-          {
-              type: 'text',
-              label: 'Телефон',
-              placeholder:"Телефон",
-              value: this.state.values.telephoneValue,
-              onChange: (event) => {
-                const x = event.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,4})(\d{0,2})(\d{0,2})/);
-                event.target.value = x[1] + (x[2] ? `-${x[2]}` : '') + (x[3] ? `-${x[3]}` : '') + (x[4] ? `-${x[4]}` : '');
-                this.setState(prev => ({values: {...prev.values, telephoneValue: event.target.value}}))
-              },
-              formErrors: this.state.formErrors.telephoneValue,
-          },
-          {
-              type: 'text',
-              label: 'Сайт',
-              placeholder: 'Сайт',
-              value: this.state.values.webSiteValue,
-              onChange: (event) => {
-                if(!'https://'.startsWith(event.target.value.trim().substr(0, 8))) {
-                  this.setState(prev => ({
-                    formErrors: {
-                      ...prev.formErrors,
-                      webSiteValue: 'Строка должна начинаться с https://'
-                    }
-                  }))
-                } else {
-                  this.setState(prev => ({
-                    formErrors: {
-                      ...prev.formErrors,
-                      webSiteValue: ''
-                    },
-                    values: {
-                      ...prev.values,
-                      webSiteValue: event.target.value
-                    }
-                  }));
-                }
-              },
-              formErrors: this.state.formErrors.webSiteValue
-          },
-      ],
-      textArea: [
-          {
-            label: 'О себе',
-            rows: 7,
-            placeholder: 'О себе',
-            value: this.state.values.aboutMyselfValue,
+  
+  const formData = {
+    input: [
+        {
+            type: 'text',
+            label: 'Имя',
+            placeholder:"Имя", 
+            value: nameValue,
             onChange: (event) => {
-              this.setState(prev => ({values: {...prev.values, aboutMyselfValue: event.target.value}}));
-              if(event.target.value.length > 600) {
-                this.setState(prev => ({
-                  formErrors: {
-                    ...prev.formErrors,
-                    aboutMyselfValue: 'Превышен лимит символов в поле'
+              let newValue = event.target.value.trim();
+              if(newValue.charAt(0) !== newValue.charAt(0).toUpperCase()) {
+                setFormErrors( prev => {
+                  return {
+                    ...prev,
+                    nameValue: 'Напишите с заглавной буквы'
                   }
-                }))
+                })
               } else {
-                this.setState(prev => ({
-                  formErrors: {
-                    ...prev.formErrors,
-                    aboutMyselfValue: ''
+                setFormErrors( prev => {
+                  return {
+                    ...prev,
+                    nameValue: ''
                   }
-                }))
-              }
-            },
-            formErrors: this.state.formErrors.aboutMyselfValue
-          },
-          {
-            label: 'Стек технологий',
-            rows: 7,
-            placeholder: 'Стек технологий',
-            value: this.state.values.technologyStackValue,
+                })
+                setNameValue(event.target.value)}
+              },
+            formErrors: formErrors.nameValue
+        },
+        {
+            type: 'text',
+            label: 'Фамилия',
+            placeholder:"Фамилия",
+            value: surnameValue,
             onChange: (event) => {
-              this.setState(prev => ({values: {...prev.values, technologyStackValue: event.target.value}}));
-              if(event.target.value.length > 600) {
-                this.setState(prev => ({
-                  formErrors: {
-                    ...prev.formErrors,
-                    technologyStackValue: 'Превышен лимит символов в поле'
+              let newValue = event.target.value.trim();
+              if(newValue.charAt(0) !== newValue.charAt(0).toUpperCase()) {
+                setFormErrors( prev => {
+                  return {
+                    ...prev,
+                    surnameValue: 'Напишите с заглавной буквы'
                   }
-                }))
+                })
               } else {
-                this.setState(prev => ({
-                  formErrors: {
-                    ...prev.formErrors,
-                    technologyStackValue: ''
+                setFormErrors( prev => {
+                  return {
+                    ...prev,
+                    surnameValue: ''
                   }
-                }))
-              }
-            },
-            formErrors: this.state.formErrors.technologyStackValue
-          },
-          {
-            label: 'Описание последнего проекта',
-            rows: 7,
-            placeholder: 'Описание последнего проекта',
-            value: this.state.values.descriptionOfTheLatestProjectValue,
+                })
+                setSurnameValue(event.target.value)}
+              },
+            formErrors: formErrors.surnameValue
+        },
+        {
+            type: 'date',
+            label: 'Дата рождения',
+            placeholder:"Дата рождения",
+            value: dateOfBirthValue,
+            onChange: (event) => setDateOfBirthValue(event.target.value),
+            formErrors: formErrors.dateOfBirthValue
+        },
+        {
+            type: 'text',
+            label: 'Телефон',
+            placeholder:"Телефон",
+            value: telephoneValue,
             onChange: (event) => {
-              this.setState(prev => ({values: {...prev.values, descriptionOfTheLatestProjectValue: event.target.value}}));
-              if(event.target.value.length > 600) {
-                this.setState(prev => ({
-                  formErrors: {
-                    ...prev.formErrors,
-                    descriptionOfTheLatestProjectValue: 'Превышен лимит символов в поле'
-                  }
-                }))
-              } else {
-                this.setState(prev => ({
-                  formErrors: {
-                    ...prev.formErrors,
-                    descriptionOfTheLatestProjectValue: ''
-                  }
-                }))
-              }
+              const x = event.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,4})(\d{0,2})(\d{0,2})/);
+              event.target.value = x[1] + (x[2] ? `-${x[2]}` : '') + (x[3] ? `-${x[3]}` : '') + (x[4] ? `-${x[4]}` : '');
+              setTelephoneValue(event.target.value);
             },
-            formErrors: this.state.formErrors.descriptionOfTheLatestProjectValue
+            formErrors: formErrors.telephoneValue,
+        },
+        {
+            type: 'text',
+            label: 'Сайт',
+            placeholder: 'Сайт',
+            value: webSiteValue,
+            onChange: (event) => {
+              if(!'https://'.startsWith(event.target.value.trim().substr(0, 8))) {
+                setFormErrors(prev => {
+                  return {
+                    ...prev,
+                    webSiteValue: 'Строка должна начинаться с https://'
+                  }
+                })
+              } else {
+                setFormErrors(prev => {
+                  return {
+                    ...prev,
+                    webSiteValue: ''
+                  }
+                })
+              }
+            setWebSiteValue(event.target.value)
+            },
+            formErrors: formErrors.webSiteValue
+        },
+    ],
+    textArea: [
+        {
+          label: 'О себе',
+          rows: 7,
+          placeholder: 'О себе',
+          value: aboutMyselfValue,
+          onChange: (event) => {
+            setAboutMyselfValue(event.target.value)
+            if(event.target.value.length > 600) {
+              setFormErrors( prev => {
+                return {
+                  ...prev,
+                  aboutMyselfValue: 'Превышен лимит символов в поле'
+                }
+              })
+            } else {
+              setFormErrors( prev => {
+                return {
+                  ...prev,
+                  aboutMyselfValue: ''
+                }
+              })
+            }
           },
-      ]
-  };  
-
-if(this.state.isSubmitted === true) {
+          formErrors: formErrors.aboutMyselfValue
+        },
+        {
+          label: 'Стек технологий',
+          rows: 7,
+          placeholder: 'Стек технологий',
+          value: technologyStackValue,
+          onChange: (event) => {
+            setTechnologyStackValue(event.target.value)
+            if(event.target.value.length > 600) {
+              setFormErrors( prev => {
+                return {
+                  ...prev,
+                  technologyStackValue: 'Превышен лимит символов в поле'
+                }
+              })
+            } else {
+              setFormErrors( prev => {
+                return {
+                  ...prev,
+                  technologyStackValue: ''
+                }
+              })
+            }
+          },
+          formErrors: formErrors.technologyStackValue
+        },
+        {
+          label: 'Описание последнего проекта',
+          rows: 7,
+          placeholder: 'Описание последнего проекта',
+          value: descriptionOfTheLatestProjectValue,
+          onChange: (event) => {
+            setDescriptionOfTheLatestProjectValue(event.target.value);
+            if(event.target.value.length > 600) {
+              setFormErrors( prev => {
+                return {
+                  ...prev,
+                  descriptionOfTheLatestProjectValue: 'Превышен лимит символов в поле'
+                }
+              })
+            } else {
+              setFormErrors( prev => {
+                return {
+                  ...prev,
+                  descriptionOfTheLatestProjectValue: ''
+                }
+              })
+            }
+          },
+          formErrors: formErrors.descriptionOfTheLatestProjectValue
+        },
+    ]
+};  
+  
+if(isSubmitted === true) {
   return (
     <UserProfile 
-      name={this.state.values.nameValue} 
-      surname={this.state.values.surnameValue} 
-      dateOfBirth={this.state.values.dateOfBirthValue} 
-      telephone={this.state.values.telephoneValue}
-      webSite={this.state.values.webSiteValue}
-      aboutMyself={this.state.values.aboutMyselfValue}
-      technologyStack={this.state.values.technologyStackValue}
-      descriptionOfTheLatestProject={this.state.values.descriptionOfTheLatestProjectValue}
+      name={nameValue} 
+      surname={surnameValue} 
+      dateOfBirth={dateOfBirthValue} 
+      telephone={telephoneValue}
+      webSite={webSiteValue}
+      aboutMyself={aboutMyselfValue}
+      technologyStack={technologyStackValue}
+      descriptionOfTheLatestProject={descriptionOfTheLatestProjectValue}
+      isSubmitted={isSubmitted}
       />
   )
 } else {
@@ -302,14 +293,13 @@ if(this.state.isSubmitted === true) {
         {formData.input.map((el,index) => <Input key={index} formErrors={el.formErrors} type={el.type} label={el.label} placeholder={el.placeholder} value={el.value} onChange={el.onChange}/>)}
         {formData.textArea.map((el,index) => <TextareaField key={index} formErrors={el.formErrors} label={el.label} rows={el.rows} placeholder={el.placeholder} value={el.value} onChange={el.onChange}/>)}   
         <div>
-          <input type="submit" value="Сохранить" onClick={this.handleSubmit.bind(this)}/>
-          <input type="submit" value="Отмена" onClick={this.cleanData.bind(this)}/>
+          <input type="submit" value="Сохранить" onClick={handleClick}/>
+          <input type="submit" value="Отмена" onClick={dataCleans}/>
         </div>
       </form>
     </>
   );
 }
-  }
 }
 
 export default FormQuestionnaire;
