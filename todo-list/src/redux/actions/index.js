@@ -2,9 +2,8 @@ import {
     ADD_NAME,
     ADD_TODO,
     DELETE_TODO,
-    EDIT_TODO,
     UPDATE_TODO,
-    MARK_COMPLETED
+    MARK_COMPLETED,
   } from "./actionTypes";
   
   export const addNewName = (text) => {
@@ -26,20 +25,11 @@ import {
       },
     };
   };
+
   export const deleteTodo = (id) => {
     return {
       type: DELETE_TODO,
       id,
-    };
-  };
-  
-  
-  export const editTodo = (id) => {
-    return {
-      type: EDIT_TODO,
-      payload: {
-        id: id,
-      },
     };
   };
   
@@ -62,4 +52,5 @@ import {
       }
     }
   }
+
   

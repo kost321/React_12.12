@@ -2,15 +2,13 @@ import {
     ADD_NAME,
     ADD_TODO,
     DELETE_TODO,
-    EDIT_TODO,
     UPDATE_TODO,
-    MARK_COMPLETED
+    MARK_COMPLETED,
   } from "../actions/actionTypes";
 
 const initialState = {
     todoName: '',
     todos: [],
-    editTodo: []
 }
 
 
@@ -27,7 +25,6 @@ export const nameReduccer = (state = initialState, action) => {
 }
   
 export const todoReducer = (state = initialState, action) => {
-
     switch (action.type) {
       case ADD_TODO:
       const{id, text} = action.payload;
@@ -48,14 +45,6 @@ export const todoReducer = (state = initialState, action) => {
         return {
           ...state,
           todos: newTodoList,
-        };
-  
-      case EDIT_TODO:
-        const editTodo = action.payload;
-        let newEditTodo = state.todos.find((item) => item.id === editTodo.id);
-        return {
-          ...state,
-          editTodo: [newEditTodo]
         };
   
       case UPDATE_TODO:
@@ -81,11 +70,11 @@ export const todoReducer = (state = initialState, action) => {
           const completTodo = state.todos.find((todo) => todo?.id === todoIdComplet);
           completTodo.isActiv = todoIsActiv;
           completTodos.push(completTodo);
-          debugger
           return {
             ...state,
             todos: [...completTodos],
           };
+
 
       default:
         return state;
