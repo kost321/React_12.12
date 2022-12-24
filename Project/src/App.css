@@ -6,6 +6,7 @@
   border-radius: 30px;
   text-align: center;
 }
+
 .title{
 padding-top: 50px;
 font-family: 'Roboto', sans-serif;
@@ -13,8 +14,7 @@ font-weight: 500;
 font-size: 24px;
 color: #707981;
 }
+
 * {
   box-sizing: border-box;
 }
-
-

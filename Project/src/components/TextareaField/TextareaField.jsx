@@ -1,4 +1,5 @@
 import React from "react";
+import Counter from "../Counter/Counter";
 
 import './textareaField.css'
 
@@ -8,7 +9,11 @@ class TextareaField extends React.Component {
     return (
       <label>
         {this.props.label}
-        <textarea autoFocus maxLength={385} rows={this.props.rows} type="text" placeholder={this.props.placeholder} value={this.props.value} onChange={this.props.onChange}/>
+        <textarea autoFocus rows={this.props.rows} type="text" placeholder={this.props.placeholder} value={this.props.value} onChange={this.props.onChange}/>        
+          <div className='additional-information'>
+            <div className='error-field'>{this.props.formErrors}</div>
+            <Counter value={this.props.value} maxLength={600}/>
+          </div>
       </label>
     )
   }  
