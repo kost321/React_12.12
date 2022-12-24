@@ -26,7 +26,7 @@ function FormQuestionnaire() {
   });
   const [isSubmitted, setSubmitted] = useState(false);
 
-  function dataCleans(event) {
+ let dataCleans = (event) => {
     setNameValue('');
     setSurnameValue('');
     setDateOfBirthValue('');
@@ -49,7 +49,7 @@ function FormQuestionnaire() {
     event.preventDefault()
   }
   
-  function handleClick(event) {
+let handleClick = (event) => {
     let newObj = {
       nameValue: nameValue,
       surnameValue: surnameValue,
@@ -86,7 +86,6 @@ function FormQuestionnaire() {
 
     setFormErrors({...newFormError});
 
-    console.log(newFormError)
     if(Object.keys(newFormError).length === 0) {
       setSubmitted(true);
     } else {
