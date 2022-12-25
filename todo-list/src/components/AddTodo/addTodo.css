@@ -1,6 +1,6 @@
 .information-block{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     width: 100%;
     align-items: center;
 
@@ -9,9 +9,12 @@
 .count-input{
     outline: none;
     border: none;
+    font-size: 17px;
+    padding: 0 10px 0 20px;
 }
 
 .main-div {
+    margin-bottom: 20px;
     position: relative;
     height: 52px;
     padding: 0 25px;

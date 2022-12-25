@@ -39,10 +39,10 @@ const TodosList = () => {
     return (
       <div className="container-todo">
           {edit ? 
-            <div >
+            <>
               <input type="text" placeholder="Add a New Task" defaultValue={text} onChange={(event) => setText(event.target.value)}/>
               <button className="add-btn" onClick={() => handleUpdateTodo(editId)}>Ok</button>
-            </div> : todos.map(todo=> {
+            </> : todos.map(todo => {
               return (
                 <div className="task-box" key={todo.id}>
                   <div className="task">

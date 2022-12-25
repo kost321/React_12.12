@@ -4,6 +4,16 @@
     width: 95%;
 }
 
+.container-todo input{
+    margin-right: 16px;
+    height: 100%;
+    width: 75%;
+    outline: none;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 0 10px 0 20px;
+    border: 1px solid #999;
+}
 .task-box{
     margin-top: 20px;
     margin-right: 5px;
