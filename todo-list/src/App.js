@@ -1,9 +1,11 @@
 import React from 'react';
-import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
 import AddTodo from './components/AddTodo/AddTodo';
 import StartPage from './components/StartPage/StartPage';
 import TabsTodo from './components/TabsTodo/TabsTodo';
+
+import './App.css';
 
 export default function App() {
   return (

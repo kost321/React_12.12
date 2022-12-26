@@ -1,9 +1,9 @@
-.information-task-block{
+.information-task-block {
     display: block;
     margin-bottom: 20px;
 }
 
-.information-task-block button{
+.information-task-block button {
     width: 100%;
 }
 
@@ -29,11 +29,11 @@
     
 }
 
-.tabs-task-container{
+.tabs-task-container {
     display: flex;
 }
 
-.tabs-task-box{
+.tabs-task-box {
     display: flex;
     margin-top: 20px;
     flex-direction: column;

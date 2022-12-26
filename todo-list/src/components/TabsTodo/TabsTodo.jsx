@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectTodos } from "../../redux/selectors/todoSelectors";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
-import './tabsTodo.css' 
+import './tabsTodo.css'; 
 
 const TabsTodo = () => {
     let navigate = useNavigate();
@@ -11,19 +11,18 @@ const TabsTodo = () => {
     const [isActive, setIsActive] = useState(true);
 
 
-    let handleBack = () =>{
-        navigate('/todolist')
+    let handleBack = () => {
+        navigate('/todolist');
     }
 
-    const todoNotActive = todos.filter((item) =>{
-        return item.isActiv === false
-    } );
+    const todoNotActive = todos.filter((item) => {
+        return item.isActiv === false;
+    });
 
-    const todoActive = todos.filter((item) =>{
-        return item.isActiv === true
-    } );
+    const todoActive = todos.filter((item) => {
+        return item.isActiv === true;
+    });
 
-    console.log(isActive)
     return (
         <>
             <div className="information-task-block">
@@ -32,31 +31,30 @@ const TabsTodo = () => {
             <div className="tabs-task-container">
                 <input className="radio" id="one" name="group" type="radio" defaultChecked/>
                 <input className="radio" id="two" name="group" type="radio"/>
-                    <div className="tabs">
-                        <label className="tab" id="one-tab" htmlFor="one" onClick={() => setIsActive(true)}>Активные задачи</label>
-                        <label className="tab" id="two-tab" htmlFor="two" onClick={() => setIsActive(false)}>Неактивные задачи</label>
-                    </div>
+                <div className="tabs">
+                    <label className="tab" id="one-tab" htmlFor="one" onClick={() => setIsActive(true)}>Активные задачи</label>
+                    <label className="tab" id="two-tab" htmlFor="two" onClick={() => setIsActive(false)}>Неактивные задачи</label>
+                </div>
             </div>
             {isActive ? todoActive.map(todo => {
-              return (
-                <div key={todo.id}>
-                    <div className="tabs-task-box" >
-                        <h3>{todo.text}</h3>
-                    </div>
-                </div>
-              )
-            }) : 
-            todoNotActive.map(todo => {
                 return (
-                  <div key={todo.id}>
-                      <div className="tabs-task-box" >
+                    <div key={todo.id}>
+                        <div className="tabs-task-box" >
                             <h3>{todo.text}</h3>
-                      </div>
-                  </div>
+                        </div>
+                    </div>
+                )
+            }) : todoNotActive.map(todo => {
+                return (
+                    <div key={todo.id}>
+                        <div className="tabs-task-box" >
+                            <h3>{todo.text}</h3>
+                        </div>
+                    </div>
                 )
             })}
         </>
     )
 }
 
-export default TabsTodo
+export default TabsTodo;

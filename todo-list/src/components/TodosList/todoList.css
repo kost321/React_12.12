@@ -1,10 +1,10 @@
-.container-todo{
+.container-todo {
     max-height: 350px;
     overflow: auto;
     width: 95%;
 }
 
-.container-todo input{
+.container-todo input {
     margin-right: 16px;
     height: 100%;
     width: 75%;
@@ -14,7 +14,7 @@
     padding: 0 10px 0 20px;
     border: 1px solid #999;
 }
-.task-box{
+.task-box {
     margin-top: 20px;
     margin-right: 5px;
     padding: 0 20px 10px 25px;
@@ -35,16 +35,16 @@
     display: flex;   
 }
 
-.task input{
+.task input {
     margin-right: 20px;
 }
 
-.task h3{
+.task h3 {
     width: 85%;
     word-wrap: break-word;
 }
 
-.delete-btn{
+.delete-btn {
     border: none;
     opacity: 0.6;
     outline: none;

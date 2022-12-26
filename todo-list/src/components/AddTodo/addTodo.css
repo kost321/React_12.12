@@ -1,12 +1,11 @@
-.information-block{
+.information-block {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
     align-items: center;
-
 }
 
-.count-input{
+.count-input {
     outline: none;
     border: none;
     font-size: 17px;
@@ -53,4 +52,3 @@
     transition: transform 0.25s ease;
     background: linear-gradient(135deg, #f5af19 0%, #f12711 100%);
 }
-

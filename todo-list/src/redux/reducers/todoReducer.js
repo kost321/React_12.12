@@ -63,7 +63,6 @@ export const todoReducer = (state = initialState, action) => {
   
         case MARK_COMPLETED:
           const { todoIdComplet,todoIsActiv } = action.payload;
-          console.log(todoIsActiv)
           const completTodos = state.todos.filter((todo) => {
             return todo.id !== todoIdComplet;
           });

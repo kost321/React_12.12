@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewTodo } from "../../redux/actions";
-import TodosList from "../TodosList/TodosList";
 import { selecteName, selectTodos } from "../../redux/selectors/todoSelectors";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
-import './addTodo.css'
+import TodosList from "../TodosList/TodosList";
+
+import './addTodo.css';
 
 export const AddTodo = () => {
     let navigate = useNavigate();
@@ -20,12 +21,12 @@ export const AddTodo = () => {
     };
 
     const handleTabs = () => {
-        navigate('/todotabs')
-    }
+        navigate('/todotabs');
+    };
 
-    const todoCount = todos.filter((item) =>{
-        return item.isActiv === true
-    } );
+    const todoCount = todos.filter((item) => {
+        return item.isActiv === true;
+    });
 
     return (
         <>
@@ -35,7 +36,7 @@ export const AddTodo = () => {
                 <button className="add-btn" onClick={() => handleTabs()}>Tabs</button>
             </div>    
             <div className="main-div">
-                <input type="text" placeholder="Add a New Task" value={text} onChange={event => setText(event.target.value)} />
+                <input type="text" placeholder="Add a New Task" value={text} onChange={event => setText(event.target.value)}/>
                 <button className="add-btn" onClick={() => handleAdd()}>Add</button>
             </div>
             <TodosList/>

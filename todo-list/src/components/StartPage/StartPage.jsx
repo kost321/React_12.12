@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addNewName } from "../../redux/actions";
 import { selecteName } from "../../redux/selectors/todoSelectors";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 
 export const StartPage = () => {
@@ -13,7 +13,7 @@ export const StartPage = () => {
 
     const handleAdd = () => {
         dispatch(addNewName(nameValue));
-        navigate('/todolist')
+        navigate('/todolist');
         setNameValue('');
     };
 
