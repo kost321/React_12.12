@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import './tabsTodo.css'; 
 
-const TabsTodo = () => {
+export const TabsTodo = () => {
     let navigate = useNavigate();
     const todos = useSelector(selectTodos);
     const [isActive, setIsActive] = useState(true);
@@ -36,25 +36,20 @@ const TabsTodo = () => {
                     <label className="tab" id="two-tab" htmlFor="two" onClick={() => setIsActive(false)}>Неактивные задачи</label>
                 </div>
             </div>
-            {isActive ? todoActive.map(todo => {
-                return (
+            {isActive ? todoActive.map((todo) => (
+                <div key={todo.id}>
+                    <div className="tabs-task-box" >
+                        <h3>{todo.text}</h3>
+                    </div>
+                </div>
+                )) : todoNotActive.map((todo) => (
                     <div key={todo.id}>
                         <div className="tabs-task-box" >
                             <h3>{todo.text}</h3>
                         </div>
                     </div>
                 )
-            }) : todoNotActive.map(todo => {
-                return (
-                    <div key={todo.id}>
-                        <div className="tabs-task-box" >
-                            <h3>{todo.text}</h3>
-                        </div>
-                    </div>
-                )
-            })}
+            )}
         </>
     )
 }
-
-export default TabsTodo;

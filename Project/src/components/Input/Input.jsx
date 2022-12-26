@@ -2,7 +2,7 @@ import React from "react";
 
 import './input.css'
 
-function Input(props) {
+export const Input = (props) => {
   return (
     <label>
       {props.label}
@@ -11,5 +11,3 @@ function Input(props) {
     </label>  
   )
 }
-
-export default Input;

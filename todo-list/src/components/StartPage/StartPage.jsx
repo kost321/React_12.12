@@ -25,5 +25,3 @@ export const StartPage = () => {
         </div>
     )
 }
-
-export default StartPage;

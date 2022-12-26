@@ -5,7 +5,7 @@ import { updateTodo, deleteTodo, markTodoCompleted } from "../../redux/actions";
 
 import './todoList.css';
 
-const TodosList = () => {
+export const TodosList = () => {
   const [edit, setEdit] = useState (false);
   const [editId, setEditId] = useState();
   const todos = useSelector(selectTodos);
@@ -42,7 +42,7 @@ const TodosList = () => {
         <>
           <input type="text" placeholder="Add a New Task" defaultValue={text} onChange={(event) => setText(event.target.value)}/>
           <button className="add-btn" onClick={() => handleUpdateTodo(editId)}>Ok</button>
-        </> : todos.map(todo => {
+        </> : todos.map((todo) => {
                 return (
                   <div className="task-box" key={todo.id}>
                     <div className="task">
@@ -59,5 +59,3 @@ const TodosList = () => {
     </div>       
     )
 }
-
-export default TodosList;

@@ -4,7 +4,7 @@ import { addNewTodo } from "../../redux/actions";
 import { selecteName, selectTodos } from "../../redux/selectors/todoSelectors";
 import { useNavigate } from 'react-router-dom';
 
-import TodosList from "../TodosList/TodosList";
+import { TodosList } from "../TodosList/TodosList";
 
 import './addTodo.css';
 
@@ -43,5 +43,3 @@ export const AddTodo = () => {
         </>
     )
 }
-
-export default AddTodo;

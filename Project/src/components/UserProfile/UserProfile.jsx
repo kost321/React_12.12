@@ -2,7 +2,7 @@ import React from "react";
 
 import './userProfile.css'
 
-function UserProfile(props) {
+export const UserProfile = (props) => {
     return (
       <>
         <div className="title-user">
@@ -20,5 +20,3 @@ function UserProfile(props) {
       </>
     )
 }  
-
-export default UserProfile;

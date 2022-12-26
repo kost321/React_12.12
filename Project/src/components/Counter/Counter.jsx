@@ -1,16 +1,14 @@
 import React from "react";
 
+export const Counter = (props) => {
 
-function Counter(props) {
-  if(props.value.length  > 600) {
-    return null;      
-  } else {
-    return (
-      <div>
-        {props.value.length + '/' + props.max}
-      </div>
-    )
-  }
+  return(
+    <div>
+      {props.value.length  > 600 ? null : 
+        <>
+          {props.value.length + '/' + props.max}
+        </>
+      }
+    </div>
+  )
 }
-
-export default Counter;
