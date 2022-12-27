@@ -7,7 +7,7 @@ import { TabsTodo } from './components/TabsTodo/TabsTodo';
 
 import './App.css';
 
-export default function App() {
+export const App:React.FC = () => {
   return (
     <Router>
       <div className='wrapper'>
@@ -20,3 +20,4 @@ export default function App() {
     </Router>
   );
 }
+
