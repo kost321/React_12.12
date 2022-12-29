@@ -1,0 +1,40 @@
+.information-task-block {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.information-task-block button {
+    width: 100%;
+}
+
+.radio {
+    display: none;
+}
+
+.tab {
+    cursor: pointer;
+    padding: 10px 20px;
+    margin: 0px 2px;
+    background: rgb(39, 36, 36);
+    display: inline-block;
+    color: #fff;
+    border-radius: 3px 3px 0px 0px;
+    box-shadow: 0 0.5rem 0.8rem #00000080;
+}
+
+#one:checked ~ .tabs #one-tab, #two:checked ~ .tabs #two-tab, #three:checked ~ .tabs #three-tab {
+    background: #fffffff6;
+    background: linear-gradient(135deg, #0018a7eb 0%, #f12711 100%);
+    box-shadow: 0 0.5rem 0.8rem #ff000080;
+    
+}
+
+.tabs-task-container {
+    display: flex;
+}
+
+.tabs-task-box {
+    display: flex;
+    margin-top: 20px;
+    flex-direction: column;
+}

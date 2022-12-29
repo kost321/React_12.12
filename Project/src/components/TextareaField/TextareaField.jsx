@@ -1,9 +1,9 @@
 import React from "react";
-import Counter from "../Counter/Counter";
+import { Counter } from "../Counter/Counter";
 
 import './textareaField.css'
 
-function TextareaField(props) {
+export const TextareaField = (props) => {
   return (
     <label>
       {props.label}
@@ -15,5 +15,3 @@ function TextareaField(props) {
     </label>
   )  
 }
-
-export default TextareaField;

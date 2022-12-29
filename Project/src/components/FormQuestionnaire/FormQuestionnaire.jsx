@@ -1,11 +1,11 @@
-import React, {useState} from "react";
-import Input from "../Input/Input";
-import TextareaField from "../TextareaField/TextareaField"
-import UserProfile from "../UserProfile/UserProfile";
+import React, { useState } from "react";
+import { Input } from "../Input/Input";
+import { TextareaField } from "../TextareaField/TextareaField"
+import { UserProfile } from "../UserProfile/UserProfile";
 
 import './formQuestionnaire.css'
 
-function FormQuestionnaire() {
+export const FormQuestionnaire = () => {
   const [nameValue,setNameValue] = useState('');
   const [surnameValue, setSurnameValue] = useState('');
   const [dateOfBirthValue, setDateOfBirthValue] = useState('');
@@ -301,5 +301,3 @@ if(isSubmitted === true) {
   );
 }
 }
-
-export default FormQuestionnaire;
