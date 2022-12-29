@@ -31,7 +31,7 @@ export const AddTodo = () => {
     return (
         <>
             <div className="information-block">
-                <h3>{name.text}</h3>
+                <h3>{name}</h3>
                 <input className="count-input" value={`Активные задачи:${todoCount.length}`} readOnly/>
                 <button className="add-btn" onClick={() => handleTabs()}>Tabs</button>
             </div>    

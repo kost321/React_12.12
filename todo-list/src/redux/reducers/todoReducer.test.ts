@@ -8,9 +8,7 @@ test('renders learn react link', () => {
     todoName: '',
     todos: [],
 }
-
   const action = addNewName('Kostya');
-
   const result = nameReduccer(state,action);
   expect(result).toEqual({
     todoName:'Kostya',
