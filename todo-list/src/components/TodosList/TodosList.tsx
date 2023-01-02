@@ -5,29 +5,30 @@ import { updateTodo, deleteTodo, markTodoCompleted } from "../../redux/actions";
 
 import './todoList.css';
 
-export const TodosList = () => {
+export const TodosList:React.FC = () => {
   const [edit, setEdit] = useState (false);
-  const [editId, setEditId] = useState();
+  const [editId, setEditId] = useState<number>();
   const todos = useSelector(selectTodos);
-  const [text, setText] = useState();
+  const [text, setText] = useState('');
   const dispatch = useDispatch();
 
-  const handleEdit = (id, text) => {
+  const handleEdit = (id:number, text:string) => {
     setText(text);
     setEdit(true);
     setEditId(id);
   };
 
-  const handleUpdateTodo = (id) => {
+  const handleUpdateTodo = (id:number) => {
     if(text === undefined) {
       setEdit(false);  
     } else {
-      dispatch(updateTodo(id, text, todos));
+      debugger
+      dispatch(updateTodo(id, text));
       setEdit(false);
     }
   }
     
-  const handleClick = (id, event) => {
+  const handleClick = (id:number, event:any) => {
     let addClass = event.target.classList.toggle("crossed-line");
     if(addClass) {
       dispatch(markTodoCompleted(id, false));
@@ -41,7 +42,7 @@ export const TodosList = () => {
       {edit ? 
         <>
           <input type="text" placeholder="Add a New Task" defaultValue={text} onChange={(event) => setText(event.target.value)}/>
-          <button className="add-btn" onClick={() => handleUpdateTodo(editId)}>Ok</button>
+          <button className="add-btn" onClick={() => handleUpdateTodo(editId!)}>Ok</button>
         </> : todos.map((todo) => {
                 return (
                   <div className="task-box" key={todo.id}>

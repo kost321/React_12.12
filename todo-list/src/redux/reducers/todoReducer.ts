@@ -5,14 +5,19 @@ import {
     UPDATE_TODO,
     MARK_COMPLETED,
   } from "../actions/actionTypes";
+  import { AnyAction } from 'redux'
 
-const initialState = {
+export interface StateTodo {
+  todoName: string;
+  todos: any[];
+}
+
+export const initialState: StateTodo = {
     todoName: '',
     todos: [],
 }
 
-
-export const nameReduccer = (state = initialState, action) => {
+export const nameReduccer = (state = initialState, action: AnyAction): StateTodo => {
   if(action.type === ADD_NAME) {
     let name = action.payload;
     return {
@@ -24,7 +29,7 @@ export const nameReduccer = (state = initialState, action) => {
   }
 }
   
-export const todoReducer = (state = initialState, action) => {
+export const todoReducer = (state = initialState, action: AnyAction): StateTodo => {
     switch (action.type) {
       case ADD_TODO:
       const{id, text} = action.payload;

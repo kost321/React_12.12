@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import './tabsTodo.css'; 
 
-export const TabsTodo = () => {
+export const TabsTodo:React.FC = () => {
     let navigate = useNavigate();
     const todos = useSelector(selectTodos);
     const [isActive, setIsActive] = useState(true);

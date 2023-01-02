@@ -5,9 +5,9 @@ import { selecteName } from "../../redux/selectors/todoSelectors";
 import { useNavigate } from 'react-router-dom';
 
 
-export const StartPage = () => {
+export const StartPage:React.FC = () => {
     let navigate = useNavigate();
-    const[nameValue, setNameValue] = useState('');
+    const[nameValue, setNameValue] = useState<string>('');
     const dispatch = useDispatch();
     const name = useSelector(selecteName);
 
@@ -17,11 +17,15 @@ export const StartPage = () => {
         setNameValue('');
     };
 
+    const changeHandler = (event:React.ChangeEvent<HTMLInputElement>) => {
+        setNameValue(event.target.value);
+    }
+
     return (
         <div className="main-div">
-            <div>{name.text}</div>
-            <input type="text" placeholder="Enter your name" value={nameValue} onChange={event => setNameValue(event.target.value)}/>
-            <button className="add-btn" onClick={() => handleAdd()}>Сохранить</button>
+            <div>{name}</div>
+            <input type="text" placeholder="Enter your name" value={nameValue} onChange={changeHandler}/>
+            <button className="add-btn" onClick={handleAdd}>Сохранить</button>
         </div>
     )
 }
